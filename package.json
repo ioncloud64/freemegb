@@ -1,0 +1,37 @@
+{
+  "name": "freemegb",
+  "version": "0.0.1",
+  "description": "A GameBoy simulator written for Node.js with an Electron front-end. This program is designed to simulate the real hardware that was equipped in the system itself.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioncloud64/freemegb.git"
+  },
+  "keywords": [
+    "gameboy",
+    "gb",
+    "games",
+    "emu",
+    "sim",
+    "simulation",
+    "simulator",
+    "arcade",
+    "tool",
+    "utility",
+    "ui"
+  ],
+  "author": "ioncloud64",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ioncloud64/freemegb/issues"
+  },
+  "homepage": "https://github.com/ioncloud64/freemegb#readme",
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "electron-packager": "^13.1.1"
+  }
+}
