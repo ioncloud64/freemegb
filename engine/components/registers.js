@@ -1,7 +1,7 @@
 class Registers {
   /*
-  * Get block for combined registers
-  */
+   * Get block for combined registers
+   */
   get AF() {
     return this.A << 8 | this.F;
   }
@@ -16,8 +16,8 @@ class Registers {
   }
 
   /*
-  * Set block for combined registers
-  */
+   * Set block for combined registers
+   */
   set AF(val) {
     this.A = val >> 8 & 0xFF;
     this.F = val & 0x00FF;

@@ -1,17 +1,6 @@
 const electron = require('electron');
 
-function createWindow () {
-  var appmenu = electron.Menu.buildFromTemplate([
-    {
-      label: 'Menu',
-      submenu: [
-        {label:'Adjust Notification Value'},
-        {label:'CoinMarketCap'},
-        {label:'Exit'}
-      ]
-    }
-  ])
-  electron.Menu.setApplicationMenu(appmenu);
+function createWindow() {
   // Create the browser window.
   let win = new electron.BrowserWindow({
     titlebarstyle: 'hidden',
@@ -23,8 +12,56 @@ function createWindow () {
     }
   })
 
+  var appmenu = electron.Menu.buildFromTemplate([{
+    label: 'File',
+    submenu: [{
+        label: 'Open...',
+        role: 'openFile',
+        click() {
+          const {
+            dialog
+          } = require('electron')
+          const fs = require('fs')
+          dialog.showOpenDialog(win, {
+              filters: [{
+                name: 'GameBoy Game',
+                extensions: ['gb']
+              }]
+            },
+            function(fileNames) {
+
+              // fileNames is an array that contains all the selected
+              if (fileNames === undefined) {
+                return;
+              } else {
+                readFile(fileNames[0]);
+              }
+            });
+        },
+        accelerator: 'CmdOrCtrl+O'
+      },
+      {
+        label: 'Open Recent'
+      },
+      {
+        label: 'Quit',
+        role: 'quit'
+
+      }
+    ]
+  }])
+
+  electron.Menu.setApplicationMenu(appmenu);
   // and load the index.html of the app.
   win.loadFile('main.html')
+}
+
+function readFile(fileName) {
+  const fs = require('fs');
+  var buffer = fs.readFileSync(fileName);
+  for (var i = 0x100; i < 0x100 + 20; i++) {
+    console.log(buffer[i].toString(16).toUpperCase());
+  }
 }
 
 electron.app.on('ready', createWindow)

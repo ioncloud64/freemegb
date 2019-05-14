@@ -1,35 +1,85 @@
-<table>
-  <tr>
-    <td>Offset</td>
-    <td>Data</td>
-    <td>OPCODE</td>
-    <td>Operand</td>
-  </tr>
-</table>
+<!DOCTYPE html>
+<html lang="en">
 
-<table>
-  <tr>
-    <td>AF</td>
-    <td id="AF_value">0x0000</td>
-  </tr>
-  <tr>
-    <td>BC</td>
-    <td id="BC_value">0x0000</td>
-  </tr>
-  <tr>
-    <td>DE</td>
-    <td id="DE_value">0x0000</td>
-  </tr>
-  <tr>
-    <td>HL</td>
-    <td id="HL_value">0x0000</td>
-  </tr>
-  <tr>
-    <td>SP</td>
-    <td id="SP_value">0x0000</td>
-  </tr>
-  <tr>
-    <td>PC</td>
-    <td id="PC_value">0x0000</td>
-  </tr>
-</table>
+<head>
+  <meta charset="utf-8">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+  <!-- Bootstrap Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script>
+    let $ = require('jquery');
+  </script>
+  <script>
+    require('popper.js');
+  </script>
+  <script>
+    require('bootstrap');
+  </script>
+  <title></title>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-8">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0x00</td>
+            <td>0x00</td>
+          </tr>
+          <tr>
+            <td>0x01</td>
+            <td>0x00</td>
+          </tr>
+          <tr>
+            <td>0x02</td>
+            <td>0x00</td>
+          </tr>
+          <tr>
+            <td>0x03</td>
+            <td>0x00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <table class="table">
+        <tr>
+          <td>AF</td>
+          <td id="AF_value">0x0000</td>
+        </tr>
+        <tr>
+          <td>BC</td>
+          <td id="BC_value">0x0000</td>
+        </tr>
+        <tr>
+          <td>DE</td>
+          <td id="DE_value">0x0000</td>
+        </tr>
+        <tr>
+          <td>HL</td>
+          <td id="HL_value">0x0000</td>
+        </tr>
+        <tr>
+          <td>SP</td>
+          <td id="SP_value">0x0000</td>
+        </tr>
+        <tr>
+          <td>PC</td>
+          <td id="PC_value">0x0000</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>
