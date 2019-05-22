@@ -1,5 +1,5 @@
 const Registers = require('./registers.js');
-const memory.js = require('./memory.js');
+const { MMU, ROM } = require('./memory.js');
 
 const Operations = [
   // 0x00 NOP

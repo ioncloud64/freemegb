@@ -1,0 +1,10 @@
+[default]
+name=Default
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/nate6631/.cache/gnome-builder/install/freemegb/host
+app-id=
+postbuild=
+prebuild=
+default=true

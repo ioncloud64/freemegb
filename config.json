@@ -1,0 +1,12 @@
+{
+  "options.productName": "FreeMe!GB",
+  "options.genericName": "GameBoy Emulator",
+  "dest": "dist/installers/",
+  "icon": "resources/ioncloud64_icon.png",
+  "categories": [
+    "Games"
+  ],
+  "lintianOverrides": [
+    "changelog-file-missing-in-native-package"
+  ]
+}

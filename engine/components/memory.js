@@ -1,5 +1,5 @@
 ROM = [];
-ROM.length = 188;
+ROM.length = 32768;
 
 MMU = new class {
   writeByte(address, value) {

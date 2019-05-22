@@ -1,22 +1,16 @@
-const {
-  Operations,
-  Registers
-} = require('./components/operations.js');
-const {
-  Memory,
-  ROM
-} = require("./components/memory.js");
+
 class CPU {
+  MMU = require("./components/memory").MMU;
+  ROM = require("./components/memory").ROM;
+
+  Operations = require('./components/operations');
+  Registers = require('./components/registers');
+
 
   constructor() {}
 
   step() {
-
-    // while (true) {
-    Operations[0x00]();
-    Operations
-    Registers.PC++;
-    // }
+    Operations[ROM[Registers.PC++]]();
   }
 }
 

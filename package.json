@@ -5,6 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build-win": "electron-packager . --platform=win32 --out dist/",
+    "build-darwin": "electron-packager . --platform=darwin --out dist/",
+    "build-linux-deb": "electron-packager . --platform=linux --out dist/ && electron-installer-debian --src dist/freemegb-linux-x64/ --dest dist/installers --arch amd64 --config config.json",
+    "clean": "rm -r dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +35,7 @@
   },
   "homepage": "https://github.com/ioncloud64/freemegb#readme",
   "devDependencies": {
+    "clusterize.js": "^0.18.1",
     "electron": "^5.0.1",
     "electron-packager": "^13.1.1"
   },

@@ -19,30 +19,55 @@ class Registers {
    * Set block for combined registers
    */
   set AF(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-AF', "0x" + val.toString(16).toUpperCase());
+    }
     this.A = val >> 8 & 0xFF;
     this.F = val & 0x00FF;
   }
   set BC(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-BC', "0x" + val.toString(16).toUpperCase());
+    }
     this.B = val >> 8 & 0xFF;
     this.C = val & 0x00FF;
   }
   set DE(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-DE', "0x" + val.toString(16).toUpperCase());
+    }
     this.D = val >> 8 & 0xFF;
     this.E = val & 0x00FF;
   }
   set HL(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-HL', "0x" + val.toString(16).toUpperCase());
+    }
     this.H = val >> 8 & 0xFF;
     this.L = val & 0x00FF;
+  }
+  set SP(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-SP', "0x" + val.toString(16).toUpperCase());
+    }
+    this.sp = val;
+  }
+  set PC(val) {
+    if (this.win !== undefined) {
+      this.win.webContents.send('update-PC', "0x" + val.toString(16).toUpperCase());
+    }
+    this.pc = val;
   }
 
   constructor() {
     // Initialize registers to standard values
-    this.AF = 0x01B0
-    this.BC = 0x0013
-    this.DE = 0x00D8
-    this.HL = 0x014D
+    this.AF = 0x01B0;
+    this.BC = 0x0013;
+    this.DE = 0x00D8;
+    this.HL = 0x014D;
     this.SP = 0xFFFE;
     this.PC = 0x0100;
+    this.win = undefined;
   }
 
   print() {

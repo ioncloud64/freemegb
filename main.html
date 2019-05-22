@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="HTML">
 
 <head>
   <meta charset="utf-8">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-
+  <link rel="stylesheet" href="./node_modules/clusterize.js/clusterize.css">
   <!-- Bootstrap Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script>
@@ -17,41 +17,101 @@
   <script>
     require('bootstrap');
   </script>
-  <title></title>
+  <script>
+    // renderer process
+    var ipcRenderer = require('electron').ipcRenderer;
+    ipcRenderer.on('GTK_THEME', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        registerTable = document.getElementById('REGISTER_TABLE');
+        romTable =  document.getElementById('ROM_TABLE');
+        html =  document.getElementById('HTML');
+        body =  document.getElementById('BODY');
+        registerTable.className = "table-dark table-striped";
+        romTable.className = "table-dark table-striped";
+        body.className = "bg-dark text-light";
+        html.className = "bg-dark text-light";
+      }
+    });
+    // TODO: add more listener functions here
+    ipcRenderer.on('update-ROM_TABLE', function (event,store) {
+      romTableData = document.getElementById('ROM_TABLE-data');
+      Clusterize = require("clusterize.js");
+      var clusterize = new Clusterize({
+        rows: store,
+        scrollId: 'scrollArea',
+        contentId: 'contentArea'
+      });
+      console.log(store);
+    });
+    ipcRenderer.on('update-AF', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+    ipcRenderer.on('update-BC', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+    ipcRenderer.on('update-DE', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+    ipcRenderer.on('update-HL', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+    ipcRenderer.on('update-SP', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+    ipcRenderer.on('update-PC', function (event,store) {
+      console.log(store);
+      if (store.toLowerCase().includes('dark')) {
+        console.log("TODO: Switch to dark theme here");
+      }
+    });
+  </script>
 </head>
 
-<body>
+<body id="BODY">
   <div class="row">
     <div class="col-8">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>0x00</td>
-            <td>0x00</td>
-          </tr>
-          <tr>
-            <td>0x01</td>
-            <td>0x00</td>
-          </tr>
-          <tr>
-            <td>0x02</td>
-            <td>0x00</td>
-          </tr>
-          <tr>
-            <td>0x03</td>
-            <td>0x00</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="clusterize">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+        </table>
+        <div id="scrollArea" class="clusterize-scroll">
+          <table class="table table-striped table-hover">
+            <tbody id="contentArea" class="clusterize-content">
+              <tr class="clusterize-no-data">
+                <td>Open a ROM first…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="col-4">
-      <table class="table">
+      <table class="table table-striped" id="REGISTER_TABLE">
+        <thead>
+          <th scope="col">Register</th>
+          <th scope="col">Value</th>
+        </thead>
         <tr>
           <td>AF</td>
           <td id="AF_value">0x0000</td>
@@ -79,7 +139,14 @@
       </table>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-12">
+      <h6 class="heading-6">Console:</h6>
+      <p id="console" class="border">
+        <b class="text-danger">Error:</b> 12
+      </p>
+    </div>
+  </div>
 </body>
 
 </html>
