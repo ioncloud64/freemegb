@@ -1,6 +1,6 @@
 {
   "name": "freemegb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A GameBoy simulator written for Node.js with an Electron front-end. This program is designed to simulate the real hardware that was equipped in the system itself.",
   "main": "main.js",
   "scripts": {
