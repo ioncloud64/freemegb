@@ -1,10 +1,8 @@
-const Registers = require('./registers.js');
-const { MMU, ROM } = require('./memory.js');
+
 
 const Operations = [
   // 0x00 NOP
   function() {
-    console.log("NOP executed");
     return;
   },
   // 0x01
@@ -1031,7 +1029,4 @@ const Operations = [
   }
 ];
 
-module.exports = {
-  Operations,
-  Registers
-};
+module.exports = Operations;

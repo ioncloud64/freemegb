@@ -28,7 +28,6 @@ function createWindow() {
         role: 'openFile',
         click() {
           const { dialog } = require('electron');
-          const fs = require('fs');
           dialog.showOpenDialog(win, {
               filters: [{
                 name: 'GameBoy Game',
@@ -41,7 +40,7 @@ function createWindow() {
               if (fileNames === undefined) {
                 return;
               } else {
-                readFile(fileNames[0]);
+                loadROM(fileNames[0]);
                 tData = [];
                 tDataString = "";
                 for (var i = 0; i < System.cpu.ROM.length; i++) {
@@ -52,10 +51,6 @@ function createWindow() {
                   tData.push(tDataString);
                   tDataString = "";
                 }
-                fs.writeFile("temp.txt", tData, (err) => {
-                  if (err) console.log(err);
-                    console.log("Successfully Written to File.");
-                });
                 win.send('update-ROM_TABLE', tData);
               }
             });
@@ -78,7 +73,7 @@ function createWindow() {
           label: 'Start/Resume',
           accelerator: 'F5',
           click() {
-            console.log("Start/Resume");
+            System.emit('start');
           }
         },
         {
@@ -96,10 +91,29 @@ function createWindow() {
           }
         },
         {
+          label: 'Step',
+          accelerator: 'F10',
+          click() {
+
+          }
+        },
+        {
           label: 'Dev Tools',
           accelerator: 'Shift+F12',
           click() {
             win.webContents.openDevTools();
+          }
+        }
+      ]
+    },
+    {
+      label: 'System',
+      submenu: [
+        {
+          label: 'Run',
+          accelerator: 'CmdOrCtrl+R',
+          click() {
+            System.emit('start');
           }
         }
       ]
@@ -127,10 +141,12 @@ function createWindow() {
   System.cpu.Registers.win = win;
 }
 
-function readFile(fileName) {
+function loadROM(fileName) {
   const fs = require('fs');
   var buffer = fs.readFileSync(fileName);
-  System.cpu.ROM = buffer;
+  for (const value of buffer) {
+    System.cpu.ROM.push(value);
+  }
 }
 
 electron.app.on('ready', createWindow);

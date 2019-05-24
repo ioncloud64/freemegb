@@ -6,6 +6,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="./node_modules/clusterize.js/clusterize.css">
+  <link rel="stylesheet" href="./css/main.css">
   <!-- Bootstrap Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script>
@@ -21,7 +22,6 @@
     // renderer process
     var ipcRenderer = require('electron').ipcRenderer;
     ipcRenderer.on('GTK_THEME', function (event,store) {
-      console.log(store);
       if (store.toLowerCase().includes('dark')) {
         registerTable = document.getElementById('REGISTER_TABLE');
         romTable =  document.getElementById('ROM_TABLE');
@@ -42,43 +42,30 @@
         scrollId: 'scrollArea',
         contentId: 'contentArea'
       });
-      console.log(store);
     });
     ipcRenderer.on('update-AF', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var AF_val = document.getElementById('AF_value');
+      AF_val.innerHTML = store;
     });
     ipcRenderer.on('update-BC', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var BC_val = document.getElementById('BC_value');
+      BC_val.innerHTML = store;
     });
     ipcRenderer.on('update-DE', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var DE_val = document.getElementById('DE_value');
+      DE_val.innerHTML = store;
     });
     ipcRenderer.on('update-HL', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var HL_val = document.getElementById('HL_value');
+      HL_val.innerHTML = store;
     });
     ipcRenderer.on('update-SP', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var SP_val = document.getElementById('SP_value');
+      SP_val.innerHTML = store;
     });
     ipcRenderer.on('update-PC', function (event,store) {
-      console.log(store);
-      if (store.toLowerCase().includes('dark')) {
-        console.log("TODO: Switch to dark theme here");
-      }
+      var PC_val = document.getElementById('PC_value');
+      PC_val.innerHTML = store;
     });
   </script>
 </head>
@@ -95,7 +82,7 @@
             </tr>
           </thead>
         </table>
-        <div id="scrollArea" class="clusterize-scroll">
+        <div id="scrollArea" class="clusterize-scroll h-100">
           <table class="table table-striped table-hover">
             <tbody id="contentArea" class="clusterize-content">
               <tr class="clusterize-no-data">
