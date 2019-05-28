@@ -1,6 +1,18 @@
+/**
+*  Array for ROM file Data
+**/
 ROM = [];
 
+/**
+*  MMU controls memory in RAM banks and provides functions
+*  for writing/reading bytes.
+**/
 MMU = new class {
+  flags = {
+      SUBTRACT: 0x01,
+      ADD: 0x08
+  }
+
   writeByte(address, value) {
     switch (address & 0xF000) {
       case 0x0000: case 0x1000:

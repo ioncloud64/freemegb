@@ -68,6 +68,13 @@
       PC_val.innerHTML = store;
     });
   </script>
+
+  <script type="text/javascript">
+    function addBreakpoint(src) {
+      var ipcRenderer = require('electron').ipcRenderer;
+      console.log(ipcRenderer.send('add-breakpoint', src.children[0].innerHTML));
+    }
+  </script>
 </head>
 
 <body id="BODY">

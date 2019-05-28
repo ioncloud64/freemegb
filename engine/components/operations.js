@@ -1,5 +1,6 @@
-
-
+/**
+*  An array of functions that hold instructions for the CPU
+**/
 const Operations = [
   // 0x00 NOP
   function() {

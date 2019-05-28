@@ -1,29 +1,14 @@
+/**
+*  Registers hold data in 8-bit values and are
+*  combined respectively for the real-world system
+**/
 class Registers {
-  /*
-   * Get block for combined registers
-   */
-  get AF() {
-    return this.A << 8 | this.F;
-  }
-  get BC() {
-    return this.B << 8 | this.C;
-  }
-  get DE() {
-    return this.D << 8 | this.E;
-  }
-  get HL() {
-    return this.H << 8 | this.L;
-  }
-  get SP() {
-    return this.sp;
-  }
-  get PC() {
-    return this.pc;
-  }
 
-  /*
-   * Set block for combined registers
-   */
+  /**
+  *  16-bit Register AF
+  *  A: 8-bit
+  *  F: 8-bit - Flag Register
+  **/
   set AF(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-AF', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
@@ -31,6 +16,15 @@ class Registers {
     this.A = val >> 8 & 0xFF;
     this.F = val & 0x00FF;
   }
+  get AF() {
+    return this.A << 8 | this.F;
+  }
+
+  /**
+  *  16-bit Register BC
+  *  B: 8-bit
+  *  C: 8-bit
+  **/
   set BC(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-BC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
@@ -38,6 +32,15 @@ class Registers {
     this.B = val >> 8 & 0xFF;
     this.C = val & 0x00FF;
   }
+  get BC() {
+    return this.B << 8 | this.C;
+  }
+
+  /**
+  *  16-bit Register DE
+  *  D: 8-bit
+  *  E: 8-bit
+  **/
   set DE(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-DE', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
@@ -45,6 +48,15 @@ class Registers {
     this.D = val >> 8 & 0xFF;
     this.E = val & 0x00FF;
   }
+  get DE() {
+    return this.D << 8 | this.E;
+  }
+
+  /**
+  *  16-bit Register HL
+  *  H: 8-bit
+  *  L: 8-bit
+  **/
   set HL(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-HL', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
@@ -52,21 +64,40 @@ class Registers {
     this.H = val >> 8 & 0xFF;
     this.L = val & 0x00FF;
   }
+  get HL() {
+    return this.H << 8 | this.L;
+  }
+
+  /**
+  *  16-bit Register SP - Stack Pointer
+  **/
   set SP(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-SP', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.sp = val;
   }
+  get SP() {
+    return this.sp;
+  }
+
+  /**
+  *  16-bit Register PC - Program Counter
+  **/
   set PC(val) {
     if (this.win !== undefined) {
       this.win.webContents.send('update-PC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.pc = val;
   }
+  get PC() {
+    return this.pc;
+  }
 
+  /**
+  *  Data initialization
+  **/
   constructor() {
-    // Initialize registers to 0 values
     this.AF = 0;
     this.BC = 0;
     this.DE = 0;
@@ -76,6 +107,9 @@ class Registers {
     this.win = undefined;
   }
 
+  /**
+  *  Prints the registers to the console preformatted
+  **/
   print() {
     console.log("AF: 0x%s", this.AF.toString(16).padStart(4, '0').toUpperCase());
     console.log("BC: 0x%s", this.BC.toString(16).padStart(4, '0').toUpperCase());

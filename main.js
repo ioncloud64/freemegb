@@ -1,8 +1,14 @@
+/**
+*  Required imports
+**/
 const electron = require('electron');
 const { execSync } = require('child_process');
 const System = require('./engine/system');
 var win;
 
+/**
+*  Creates the Electron Window
+**/
 function createWindow() {
   let GTK_THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme", {encoding: 'utf8'});
 
@@ -18,7 +24,9 @@ function createWindow() {
       nodeIntegration: true
     }
   });
-
+  /**
+  *  Build Application Menu
+  **/
   var appmenu = electron.Menu.buildFromTemplate([
     {
     label: 'File',
@@ -44,9 +52,10 @@ function createWindow() {
                 tData = [];
                 tDataString = "";
                 for (var i = 0; i < System.cpu.ROM.length; i++) {
-                  tDataString += "<tr>\n";
+                  romLocData = System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0');
+                  tDataString += "<tr onclick='addBreakpoint(this);'>\n";
                   tDataString += "<th scope='row'>0x" + i.toString(16).toUpperCase().padStart(6, '0') + "</th>";
-                  tDataString += "<td>0x" + System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0') + "</td>\n";
+                  tDataString += "<td id='" + romLocData + "'>0x" + romLocData + "</td>\n";
                   tDataString += "</tr>\n";
                   tData.push(tDataString);
                   tDataString = "";
@@ -139,8 +148,16 @@ function createWindow() {
     win.webContents.send('GTK_THEME', GTK_THEME);
   });
   System.cpu.Registers.win = win;
+  // Required for when we exit to still reuse the console
+  win.on('closed', () => {
+    process.stdin.setRawMode(false);
+    process.exit();
+  });
 }
 
+/**
+*  Loads the ROM file into the memory of the cpu's ROM
+**/
 function loadROM(fileName) {
   const fs = require('fs');
   var buffer = fs.readFileSync(fileName);
@@ -149,4 +166,7 @@ function loadROM(fileName) {
   }
 }
 
+/**
+*  Creates the window when Electron.js is ready
+**/
 electron.app.on('ready', createWindow);
