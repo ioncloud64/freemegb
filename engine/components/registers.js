@@ -11,7 +11,8 @@ class Registers {
   **/
   set AF(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-AF', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-AF', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.A = val >> 8 & 0xFF;
     this.F = val & 0x00FF;
@@ -27,7 +28,8 @@ class Registers {
   **/
   set BC(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-BC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-BC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.B = val >> 8 & 0xFF;
     this.C = val & 0x00FF;
@@ -43,7 +45,8 @@ class Registers {
   **/
   set DE(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-DE', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-DE', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.D = val >> 8 & 0xFF;
     this.E = val & 0x00FF;
@@ -59,7 +62,8 @@ class Registers {
   **/
   set HL(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-HL', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-HL', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.H = val >> 8 & 0xFF;
     this.L = val & 0x00FF;
@@ -73,7 +77,8 @@ class Registers {
   **/
   set SP(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-SP', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-SP', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.sp = val;
   }
@@ -86,7 +91,8 @@ class Registers {
   **/
   set PC(val) {
     if (this.win !== undefined) {
-      this.win.webContents.send('update-PC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
+      this.win.webContents.
+        send('update-PC', "0x" + val.toString(16).toUpperCase().padStart(4, '0'));
     }
     this.pc = val;
   }

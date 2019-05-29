@@ -7,7 +7,7 @@ class CPU {
 
 
   constructor() {}
-  
+
   init() {
     // Initialize registers to standard values
     this.Registers.AF = 0x01B0;

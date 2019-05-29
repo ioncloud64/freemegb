@@ -1,4 +1,24 @@
 /**
+*  Setup console for GUI and logs
+**/
+console.clear();
+const fs = require('fs');
+const home = require('os').homedir();
+const prgmdir = home + '/freemegb';
+const prgmlogs = prgmdir + '/logs';
+const logfile = prgmlogs + '/' + new Date().toISOString() + '.log';
+if (!fs.existsSync(prgmdir)){
+    fs.mkdirSync(prgmdir);
+}
+if (!fs.existsSync(prgmlogs)){
+    fs.mkdirSync(prgmlogs);
+}
+fs.writeFile(logfile, "", function (err) {
+  if (err) throw err;
+  console.log(logfile + ' is created successfully.');
+});
+
+/**
 *  Required imports
 **/
 const electron = require('electron');
@@ -10,8 +30,8 @@ var win;
 *  Creates the Electron Window
 **/
 function createWindow() {
-  let GTK_THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme", {encoding: 'utf8'});
-
+  let GTK_THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme",
+    {encoding: 'utf8'});
 
   // Create the browser window.
   win = new electron.BrowserWindow({
@@ -24,6 +44,7 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+
   /**
   *  Build Application Menu
   **/
@@ -134,7 +155,7 @@ function createWindow() {
         label: 'FreeMe!GB Settings',
         accelerator: 'CmdOrCtrl+S',
         click() {
-          console.log("FreeMe!GB Settings");
+          win.webContents.send('freemegb-settings');
         }
       }
     ]
@@ -148,11 +169,6 @@ function createWindow() {
     win.webContents.send('GTK_THEME', GTK_THEME);
   });
   System.cpu.Registers.win = win;
-  // Required for when we exit to still reuse the console
-  win.on('closed', () => {
-    process.stdin.setRawMode(false);
-    process.exit();
-  });
 }
 
 /**
