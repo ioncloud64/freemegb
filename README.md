@@ -4,7 +4,7 @@
 A GameBoy simulator written for Node.js with an Electron front-end. This program is designed to simulate the real hardware that was equipped in the system itself.
 
 ## Features
-#### Note: not all features may be implemented yet
+*Note: not all features may be implemented yet*
 * Usable debugging utility to track register values as well as CPU instructions
 * Interpreted instructions from the loaded ROM
 * Self-updating
