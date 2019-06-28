@@ -1,24 +1,4 @@
 /**
-*  Setup console for GUI and logs
-**/
-console.clear();
-const fs = require('fs');
-const home = require('os').homedir();
-const prgmdir = home + '/freemegb';
-const prgmlogs = prgmdir + '/logs';
-const logfile = prgmlogs + '/' + new Date().toISOString() + '.log';
-if (!fs.existsSync(prgmdir)){
-    fs.mkdirSync(prgmdir);
-}
-if (!fs.existsSync(prgmlogs)){
-    fs.mkdirSync(prgmlogs);
-}
-fs.writeFile(logfile, "", function (err) {
-  if (err) throw err;
-  console.log(logfile + ' is created successfully.');
-});
-
-/**
 *  Required imports
 **/
 const electron = require('electron');
@@ -70,18 +50,24 @@ function createWindow() {
                 return;
               } else {
                 loadROM(fileNames[0]);
-                tData = [];
-                tDataString = "";
+                var columns = [
+                  {id: "offset", name: "Offset", field: "offset"},
+                  {id: "value", name: "Value", field: "value"}
+                ];
+                var options = {
+                  enableColumnReorder: false,
+                  forceFitColumns: true
+                };
+                var rows = [];
                 for (var i = 0; i < System.cpu.ROM.length; i++) {
-                  romLocData = System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0');
-                  tDataString += "<tr onclick='addBreakpoint(this);'>\n";
-                  tDataString += "<th scope='row'>0x" + i.toString(16).toUpperCase().padStart(6, '0') + "</th>";
-                  tDataString += "<td id='" + romLocData + "'>0x" + romLocData + "</td>\n";
-                  tDataString += "</tr>\n";
-                  tData.push(tDataString);
-                  tDataString = "";
+                  rows.push({
+                    offset: i.toString(16).toUpperCase().padStart(6, '0'),
+                    value: "0x" + System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0')
+                  });
                 }
-                win.send('update-ROM_TABLE', tData);
+                console.log(rows);
+                // var grid = new SlickGrid.Grid("#romGrid", data, columns, options);
+                win.send('update-ROM_TABLE', rows, columns, options);
               }
             });
           },

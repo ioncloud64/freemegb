@@ -35,13 +35,13 @@
   },
   "homepage": "https://github.com/ioncloud64/freemegb#readme",
   "devDependencies": {
-    "clusterize.js": "^0.18.1",
-    "electron": "^5.0.1",
     "electron-packager": "^13.1.1"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "slickgrid": "^2.4.9",
+    "electron": "^5.0.1"
   }
 }
