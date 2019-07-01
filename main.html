@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-8">
       <div id="ROM_TABLE" class="h-100 w-100">
-        
+
       </div>
     </div>
     <div class="col-4">
@@ -79,6 +79,7 @@
     var ipcRenderer = require('electron').ipcRenderer;
     ipcRenderer.on('GTK_THEME', function (event,store) {
       if (store.toLowerCase().includes('dark')) {
+        // TODO: Finish Linux GTK dark-light theming
         // registerTable = document.getElementById('REGISTER_TABLE');
         // romTable =  document.getElementById('ROM_TABLE');
         // html =  document.getElementById('HTML');
@@ -89,7 +90,6 @@
         // html.className = "bg-dark text-light";
       }
     });
-    // TODO: add more listener functions here
     ipcRenderer.on('update-ROM_TABLE', function (event, rows, columns, options) {
       grid = new Slick.Grid("#ROM_TABLE", rows, columns, options);
       console.log(grid);

@@ -65,8 +65,6 @@ function createWindow() {
                     value: "0x" + System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0')
                   });
                 }
-                console.log(rows);
-                // var grid = new SlickGrid.Grid("#romGrid", data, columns, options);
                 win.send('update-ROM_TABLE', rows, columns, options);
               }
             });
