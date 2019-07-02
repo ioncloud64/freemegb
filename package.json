@@ -39,9 +39,10 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "electron": "^5.0.1",
+    "electron-progressbar": "^1.2.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
-    "slickgrid": "^2.4.9",
-    "electron": "^5.0.1"
+    "slickgrid": "^2.4.9"
   }
 }

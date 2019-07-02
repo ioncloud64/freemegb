@@ -80,14 +80,14 @@
     ipcRenderer.on('GTK_THEME', function (event,store) {
       if (store.toLowerCase().includes('dark')) {
         // TODO: Finish Linux GTK dark-light theming
-        // registerTable = document.getElementById('REGISTER_TABLE');
-        // romTable =  document.getElementById('ROM_TABLE');
-        // html =  document.getElementById('HTML');
-        // body =  document.getElementById('BODY');
-        // registerTable.className = "table-dark table-striped";
-        // romTable.className = "table-dark table-striped";
-        // body.className = "bg-dark text-light";
-        // html.className = "bg-dark text-light";
+        registerTable = document.getElementById('REGISTER_TABLE');
+        romTable =  document.getElementById('ROM_TABLE');
+        html =  document.getElementById('HTML');
+        body =  document.getElementById('BODY');
+        registerTable.className = "table-dark table-striped";
+        romTable.className = "table-dark table-striped";
+        body.className = "bg-dark text-light";
+        html.className = "bg-dark text-light";
       }
     });
     ipcRenderer.on('update-ROM_TABLE', function (event, rows, columns, options) {
