@@ -5,13 +5,47 @@ const electron = require('electron');
 const { execSync } = require('child_process');
 const System = require('./engine/system');
 var win;
+const os = require('os');
+var THEME = "";
 
 /**
 *  Creates the Electron Window
 **/
 function createWindow() {
-  let GTK_THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme",
-    {encoding: 'utf8'});
+  var os_type = os.platform();
+  console.log(os.release());
+  if (os_type === "darwin") {
+    THEME = systemPreferences.isDarkMode() ? 'dark' : 'light';
+  } else if (os_type === "win32") {
+    var [dwMajorVersion, dwMinorVersion, dwBuildNumber] = os.release().split(".").map(Number);
+    if (dwBuildNumber >= 16299) {
+      var Registry = require('winreg');
+      var regKey = new Registry({
+        hive: Registry.HKCU,
+        key: '\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize'
+      })
+      regKey.values((err, items) => {
+        if (err) {
+          console.error("Error:", err);
+        } else {
+          for (var i = 0; i < items.length; i++) {
+            console.log('ITEM: '+items[i].name+'\t'+items[i].type+'\t'+items[i].value);
+            if (items[i].name === "AppsUseLightTheme") {
+              THEME = items[i].value | 0 ? 'light' : 'dark';
+            }
+          }
+        }
+      });
+    } else {
+      THEME = "light";
+    }
+  } else if (os_type === "linux") {
+    THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme",
+      {encoding: 'utf8'});
+  } else {
+    console.error("Undetectable Operating System: Defaulting to Light Theme");
+    THEME = "light";
+  }
 
   // Create the browser window.
   win = new electron.BrowserWindow({
@@ -150,7 +184,8 @@ function createWindow() {
   // and load the index.html of the app.
   win.loadFile('main.html');
   win.webContents.on('did-finish-load', () => {
-    win.webContents.send('GTK_THEME', GTK_THEME);
+    win.webContents.send('Process_Theme', THEME);
+    console.log("THEME:", THEME);
   });
   System.cpu.Registers.win = win;
 }
