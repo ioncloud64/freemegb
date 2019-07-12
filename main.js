@@ -12,17 +12,23 @@ const os = require('os');
 var win;
 var THEME = "";
 
+/**
+*  Start gathering System Information for Theming
+**/
+setTheme();
+
 // TODO: Disable menu items by default
 
 // TODO: Read ROM file asynchronously
 
 // TODO: Show progressbar based upon how much of the file is read
 
+// TODO: Create a poll every focus/minute for theme changes
+
 /**
 *  Creates the Electron Window
 **/
 function createWindow() {
-  setTheme();
   // Create the browser window.
   win = new electron.BrowserWindow({
     title: "FreeMe!GB",
@@ -176,7 +182,7 @@ function createWindow() {
 *  Works on Windows (10; older versions default to light theme), Linux,
 *  and newer versions of Mac OS X
 **/
-function setTheme() {
+async function setTheme() {
   var os_type = os.platform();
   console.log(os.release());
   if (os_type === "darwin") {
