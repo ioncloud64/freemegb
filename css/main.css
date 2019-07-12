@@ -1,3 +1,19 @@
-#scrollArea {
-  max-height: 270px !important;
+#ROM_TABLE {
+  min-height: 270px !important;
+}
+
+.odd {
+  background: #343a40 !important;
+}
+
+.even {
+  background: rgba(255,255,255,.05) !important;
+}
+
+.ui-widget-content {
+  background: #FFFFFF00;
+}
+
+.slick-column-name {
+  font-weight: bold !important;
 }

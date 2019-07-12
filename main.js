@@ -12,6 +12,12 @@ const os = require('os');
 var win;
 var THEME = "";
 
+// TODO: Disable menu items by default
+
+// TODO: Read ROM file asynchronously
+
+// TODO: Show progressbar based upon how much of the file is read
+
 /**
 *  Creates the Electron Window
 **/
@@ -66,10 +72,11 @@ function createWindow() {
                 var rows = [];
                 for (var i = 0; i < System.cpu.ROM.length; i++) {
                   rows.push({
-                    offset: i.toString(16).toUpperCase().padStart(6, '0'),
+                    offset: "0x" + i.toString(16).toUpperCase().padStart(6, '0'),
                     value: "0x" + System.cpu.ROM[i].toString(16).toUpperCase().padStart(4, '0')
                   });
                 }
+                console.log("Sending ROM Data to UI");
                 win.send('update-ROM_TABLE', rows, columns, options);
               }
             });
