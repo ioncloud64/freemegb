@@ -211,8 +211,8 @@ async function setTheme() {
       THEME = "light";
     }
   } else if (os_type === "linux") {
-    THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme",
-      {encoding: 'utf8'});
+    var OS_THEME = execSync("gsettings get org.gnome.desktop.interface gtk-theme", {encoding: 'utf8'});
+    THEME = OS_THEME.toLowerCase().includes("dark") ? "dark" : "light";
   } else {
     console.error("Undetectable Operating System: Defaulting to Light Theme");
     THEME = "light";

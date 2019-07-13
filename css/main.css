@@ -2,18 +2,23 @@
   min-height: 270px !important;
 }
 
+:vars {
+  --table-color-odd: #343a40;
+  --table-color-even: rgba(255,255,255,.05);
+}
+
 .odd {
-  background: #343a40 !important;
+  background: var(--table-color-odd) !important;
 }
 
 .even {
-  background: rgba(255,255,255,.05) !important;
+  background: var(--table-color-even !important;
 }
 
 .ui-widget-content {
   background: #FFFFFF00;
 }
 
-.slick-column-name {
+span.slick-column-name {
   font-weight: bold !important;
 }

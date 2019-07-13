@@ -11,17 +11,17 @@
 
 <body id="BODY">
   <div class="container">
+    <!-- TODO: Overflow on page with tables
+     -->
     <div class="row">
       <div class="col-10">
-        <div id="ROM_TABLE" class="h-100 w-100">
+        <div id="ROM_TABLE" class="h-100 w-100 table">
         </div>
       </div>
-    <div class="col-2">
-      <table class="table table-striped" id="REGISTER_TABLE">
-        <thead>
-          <th scope="col">Register</th>
-          <th scope="col">Value</th>
-        </thead>
+      <div class="col-2">
+        <table class="table table-striped" id="REGISTER_TABLE">
+        <th scope="col">Register</th>
+        <th scope="col">Value</th>
         <tr>
           <td>AF</td>
           <td id="AF_value">0x0000</td>
@@ -47,7 +47,7 @@
           <td id="PC_value">0x0000</td>
         </tr>
       </table>
-    </div>
+      </div>
     </div>
     <!-- TODO: Expand Console area to fill bottom and sides of window -->
     <div class="row">
@@ -80,18 +80,20 @@
     // renderer process
     var ipcRenderer = require('electron').ipcRenderer;
     ipcRenderer.on('Process_Theme', function (event,store) {
-      registerTable = document.getElementById('REGISTER_TABLE');
-      romTable =  document.getElementById('ROM_TABLE');
       html =  document.getElementById('HTML');
       body =  document.getElementById('BODY');
-      registerTable.className = "table-" + store + " table-striped";
-      romTable.className = "table-" + store + " table-striped";
       body.className = "bg-" + store + " text-" + (store === "dark" ? "light" : "dark");
       html.className = "bg-" + store + " text-" + (store === "dark" ? "light" : "dark");
+      if (store === "light") {
+        document.documentElement.style.setProperty("--table-color-odd", "rgb(0, 0, 0, 0.05)");
+        document.documentElement.style.setProperty("--table-color-even", "#FFFFFF");
+      } else {
+        document.documentElement.style.setProperty("--table-color-odd", "#343434ac");
+        document.documentElement.style.setProperty("--table-color-even", "#rgb(0, 0, 0, 0.05)");
+      }
     });
     ipcRenderer.on('update-ROM_TABLE', function (event, rows, columns, options) {
       grid = new Slick.Grid("#ROM_TABLE", rows, columns, options);
-      console.log(grid);
     });
 
     ipcRenderer.on('update-AF', function (event,store) {
