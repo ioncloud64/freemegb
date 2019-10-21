@@ -1,6 +1,8 @@
+REGISTERS = require('./registers').REGISTERS;
+
 /**
-*  An array of functions that hold instructions for the CPU
-**/
+ *  An array of functions that hold instructions for the CPU
+ **/
 const Operations = [
   // 0x00 NOP
   function() {
@@ -486,59 +488,72 @@ const Operations = [
   },
   // 0x78
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A B");
+    REGISTERS.A = REGISTERS.B;
   },
   // 0x79
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A C");
+    REGISTERS.A = REGISTERS.C;
   },
   // 0x7A
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A D");
+    REGISTERS.A = REGISTERS.D;
   },
   // 0x7B
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A E");
+    REGISTERS.A = REGISTERS.E;
   },
   // 0x7C
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A H");
+    REGISTERS.A = REGISTERS.H;
   },
   // 0x7D
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A L");
+    REGISTERS.A = REGISTERS.L;
   },
   // 0x7E
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A HL");
+    REGISTERS.A = MMU.readByte(REGISTERS.HL);
   },
   // 0x7F
   function() {
-    throw Error("Instruction not implemented");
+    console.log("LOAD A A");
   },
   // 0x80
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A B");
+    MMU.ADD(REGISTERS.A, REGISTERS.B);
   },
   // 0x81
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A C");
+    MMU.ADD(REGISTERS.A, REGISTERS.C);
   },
   // 0x82
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A D");
+    MMU.ADD(REGISTERS.A, REGISTERS.D);
   },
   // 0x83
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A E");
+    MMU.ADD(REGISTERS.A, REGISTERS.E);
   },
   // 0x84
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A H");
+    MMU.ADD(REGISTERS.A, REGISTERS.H);
   },
   // 0x85
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A L");
+    MMU.ADD(REGISTERS.A, REGISTERS.L);
   },
   // 0x86
   function() {
@@ -546,39 +561,48 @@ const Operations = [
   },
   // 0x87
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADD A A");
+    MMU.ADD(REGISTERS.A, REGISTERS.A);
   },
   // 0x88
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A B");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.B);
   },
   // 0x89
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A C");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.C);
   },
   // 0x8A
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A D");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.D);
   },
   // 0x8B
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A E");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.E);
   },
   // 0x8C
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A H");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.H);
   },
   // 0x8D
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A L");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.L);
   },
   // 0x8E
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A HL");
+    MMU.ADD_C(REGISTERS.A, MMU.readByte(REGISTERS.HL));
   },
   // 0x8F
   function() {
-    throw Error("Instruction not implemented");
+    console.log("ADC A A");
+    MMU.ADD_C(REGISTERS.A, REGISTERS.A);
   },
   // 0x90
   function() {
@@ -786,7 +810,8 @@ const Operations = [
   },
   // 0xC3
   function() {
-    throw Error("Instruction not implemented");
+    REGISTERS.PC = ROM[REGISTERS.PC] | ROM[++REGISTERS.PC] << 8;
+    console.log("JP " + "0x" + REGISTERS.PC.toString(16).toUpperCase().padStart(4, '0'));
   },
   // 0xC4
   function() {

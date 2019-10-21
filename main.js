@@ -35,7 +35,7 @@ function createWindow() {
     titlebarstyle: 'hidden',
     width: 800,
     height: 600,
-    icon: __dirname + '/resources/ioncloud64_icon.png',
+    icon: __dirname + '/resources/ioncloud64_512.png',
     webPreferences: {
       nodeIntegration: true
     }
@@ -174,7 +174,7 @@ function createWindow() {
     win.webContents.send('Process_Theme', THEME);
     console.log("THEME:", THEME);
   });
-  System.cpu.Registers.win = win;
+  System.cpu.REGISTERS.win = win;
 }
 
 /**
