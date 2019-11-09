@@ -24,9 +24,9 @@ class System extends EventEmitter {
     this.on('pause', () => {
       paused = true;
     });
-    this.on('resume', () => {
+    this.on('resume', (debug = false) => {
       paused = false;
-      this.start();
+      this.start(debug);
     });
     ipcMain.on('add-breakpoint', (address) => {
       if (!this.breakpoints.includes(address)) {
@@ -49,8 +49,11 @@ class System extends EventEmitter {
         }
 
       } catch (e) {
+        console.log();
+        console.log();
+        console.log("Emulator encountered an error:");
         this.cpu.REGISTERS.print();
-        console.log(this.cpu.ROM[this.cpu.REGISTERS.PC].toString(16).toUpperCase().padStart(4, '0'));
+        console.log("ROM: 0x" + this.cpu.ROM[this.cpu.REGISTERS.PC].toString(16).toUpperCase().padStart(4, '0'));
         console.error(e);
         break;
       } finally {}

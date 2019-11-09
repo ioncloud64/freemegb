@@ -11,33 +11,35 @@ class CPU {
 
 
     // Initialize registers to standard values
-    REGISTERS.AF = 0x01B0;
-    REGISTERS.BC = 0x0013;
-    REGISTERS.DE = 0x00D8;
-    REGISTERS.HL = 0x014D;
-    REGISTERS.SP = 0xFFFE;
-    REGISTERS.PC = 0x0100;
+    this.REGISTERS.AF = 0x01B0;
+    this.REGISTERS.BC = 0x0013;
+    this.REGISTERS.DE = 0x00D8;
+    this.REGISTERS.HL = 0x014D;
+    this.REGISTERS.SP = 0xFFFE;
+    this.REGISTERS.PC = 0x0100;
 
 
-    MMU.readByte(REGISTERS.F);
-    console.log(REGISTERS);
+    this.MMU.readByte(REGISTERS.F);
+    // console.log(REGISTERS);
     // REGISTERS.print();
-    MMU.flags.SET(MMU.flags.ZERO);
+    this.MMU.flags.SET(this.MMU.flags.ZERO);
     // REGISTERS.print();
-    MMU.flags.SET(MMU.flags.CARRY);
+    this.MMU.flags.SET(this.MMU.flags.CARRY);
     // REGISTERS.print();
-    MMU.flags.CLEAR(MMU.flags.ZERO);
+    this.MMU.flags.CLEAR(this.MMU.flags.ZERO);
     // REGISTERS.print();
 
     // REGISTERS.print();
   }
 
-  step() {
-    this.Operations[ROM[REGISTERS.PC++]]();
-
-    setTimeout(function() {
-      console.log('hello world!');
-    }, 5000);
+  step(debug) {
+    console.log("CPU STEP");
+    // console.log(this.REGISTERS);
+    if (debug) {
+      this.REGISTERS.print();
+    }
+    this.Operations[ROM[this.REGISTERS.PC]](this.REGISTERS, this.ROM);
+    this.REGISTERS.PC++;
   }
 }
 

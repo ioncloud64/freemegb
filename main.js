@@ -108,7 +108,7 @@ function createWindow() {
           label: 'Start/Resume',
           accelerator: 'F5',
           click() {
-            System.emit('start');
+            System.emit('start', true);
           }
         },
         {

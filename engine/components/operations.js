@@ -1,1057 +1,1062 @@
-REGISTERS = require('./registers').REGISTERS;
-
 /**
  *  An array of functions that hold instructions for the CPU
  **/
 const Operations = [
   // 0x00 NOP
-  function() {
-    return;
+  function(REGISTERS, ROM) {
+    console.log("NOP");
   },
   // 0x01
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD BC NN");
-    Registers.BC = ROM[++Registers.PC] << 8 | ROM[++Registers.PC];
+    REGISTERS.BC = ROM[++REGISTERS.PC] << 8 | ROM[++REGISTERS.PC];
   },
   // 0x02
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD BC A");
-    Registers.B = Registers.A;
+    REGISTERS.B = REGISTERS.A;
   },
   // 0x03
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x04
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x05
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x06
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x07
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x08
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x09
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x0F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x10
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x11
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x12
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x13
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x14
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x15
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x16
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x17
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x18
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x19
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x1F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x20
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x21
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x22
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x23
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x24
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x25
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x26
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x27
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x28
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    console.log("JUMP Z ");
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x29
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x2F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x30
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x31
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x32
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x33
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x34
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x35
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x36
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x37
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x38
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x39
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x3F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x40
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x41
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x42
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x43
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x44
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x45
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x46
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x47
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x48
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x49
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x4F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x50
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    console.log("LOAD D B");
+    REGISTERS.D = REGISTERS.B;
   },
   // 0x51
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    console.log("LOAD D C");
+    REGISTERS.D = REGISTERS.C;
   },
   // 0x52
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x53
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x54
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x55
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x56
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x57
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x58
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x59
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x5F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x60
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x61
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x62
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x63
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x64
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x65
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x66
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x67
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x68
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x69
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x6F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x70
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x71
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x72
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x73
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x74
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x75
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x76
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x77
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x78
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A B");
     REGISTERS.A = REGISTERS.B;
   },
   // 0x79
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A C");
     REGISTERS.A = REGISTERS.C;
   },
   // 0x7A
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A D");
     REGISTERS.A = REGISTERS.D;
   },
   // 0x7B
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A E");
     REGISTERS.A = REGISTERS.E;
   },
   // 0x7C
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A H");
     REGISTERS.A = REGISTERS.H;
   },
   // 0x7D
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A L");
     REGISTERS.A = REGISTERS.L;
   },
   // 0x7E
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A HL");
     REGISTERS.A = MMU.readByte(REGISTERS.HL);
   },
   // 0x7F
-  function() {
+  function(REGISTERS, ROM) {
     console.log("LOAD A A");
   },
   // 0x80
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A B");
     MMU.ADD(REGISTERS.A, REGISTERS.B);
   },
   // 0x81
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A C");
     MMU.ADD(REGISTERS.A, REGISTERS.C);
   },
   // 0x82
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A D");
     MMU.ADD(REGISTERS.A, REGISTERS.D);
   },
   // 0x83
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A E");
     MMU.ADD(REGISTERS.A, REGISTERS.E);
   },
   // 0x84
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A H");
     MMU.ADD(REGISTERS.A, REGISTERS.H);
   },
   // 0x85
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A L");
     MMU.ADD(REGISTERS.A, REGISTERS.L);
   },
   // 0x86
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x87
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADD A A");
     MMU.ADD(REGISTERS.A, REGISTERS.A);
   },
   // 0x88
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A B");
     MMU.ADD_C(REGISTERS.A, REGISTERS.B);
   },
   // 0x89
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A C");
     MMU.ADD_C(REGISTERS.A, REGISTERS.C);
   },
   // 0x8A
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A D");
     MMU.ADD_C(REGISTERS.A, REGISTERS.D);
   },
   // 0x8B
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A E");
     MMU.ADD_C(REGISTERS.A, REGISTERS.E);
   },
   // 0x8C
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A H");
     MMU.ADD_C(REGISTERS.A, REGISTERS.H);
   },
   // 0x8D
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A L");
     MMU.ADD_C(REGISTERS.A, REGISTERS.L);
   },
   // 0x8E
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A HL");
     MMU.ADD_C(REGISTERS.A, MMU.readByte(REGISTERS.HL));
   },
   // 0x8F
-  function() {
+  function(REGISTERS, ROM) {
     console.log("ADC A A");
     MMU.ADD_C(REGISTERS.A, REGISTERS.A);
   },
   // 0x90
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x91
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x92
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x93
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x94
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x95
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x96
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x97
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x98
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x99
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9A
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9B
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9C
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9D
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9E
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0x9F
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA3
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xA9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAD
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xAF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB3
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xB9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBD
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xBF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC3
-  function() {
-    REGISTERS.PC = ROM[REGISTERS.PC] | ROM[++REGISTERS.PC] << 8;
-    console.log("JP " + "0x" + REGISTERS.PC.toString(16).toUpperCase().padStart(4, '0'));
+  function(REGISTERS, ROM) {
+    REGISTERS.PC = ROM[REGISTERS.PC+2] | ROM[REGISTERS.PC+1] << 8;
+    console.log("JUMP " + "0x" + REGISTERS.PC.toString(16).toUpperCase().padStart(4, '0'));
   },
   // 0xC4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xC9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCD
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xCF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD3
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xD9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDD
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xDF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE3
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    console.log(REGISTERS.PC);
+    var num = ROM[++REGISTERS.PC]
+    console.log(num);
+    console.log("AND A 0x" + num.toString(16).toUpperCase().padStart(4, '0'));
+    REGISTERS.A &= num;
   },
   // 0xE7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xE9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xEA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xEB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xEC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xED
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xEE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xEF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF0
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF1
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF2
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF3
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF4
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF5
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF6
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF7
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF8
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xF9
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFA
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFB
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFC
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFD
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFE
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   },
   // 0xFF
-  function() {
-    throw Error("Instruction not implemented");
+  function(REGISTERS, ROM) {
+    throw Error("Instruction not implemented 0x" + ROM[REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
   }
 ];
 
