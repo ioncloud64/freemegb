@@ -65,3 +65,7 @@ typings/
 
 # Distribution Build Folder
 dist/
+
+bin/
+
+obj/
