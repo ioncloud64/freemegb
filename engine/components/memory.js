@@ -1,5 +1,3 @@
-REGISTERS = require('./registers').REGISTERS;
-
 /**
  *  Array for ROM file Data
  **/
@@ -9,31 +7,31 @@ ROM = [];
  *  MMU controls memory in RAM banks and provides functions
  *  for writing/reading bytes.
  **/
-MMU = new class {
-  flags = {
-    CLEAR(flag) {
-      REGISTERS &= ~flag;
+MMU = {
+  flags: {
+    CLEAR(flag, REGISTERS) {
+      REGISTERS.F &= ~flag;
     },
-    SET(flag) {
+    SET(flag, REGISTERS) {
       REGISTERS.F |= flag;
     },
-    ISSSET(flag) {
-      return REGISTERS.F & flag;
+    ISSET(flag, REGISTERS) {
+      return Boolean(REGISTERS.F & flag);
     },
 
     ZERO: 0x80,
     SUBTRACT: 0x40,
     HALF_CARRY: 0x20,
     CARRY: 0x10
-  }
+  },
 
   ADD(destination, source) {
     destination += source;
-  }
+  },
 
   ADD_C(destination, source) {
     destination += source;
-  }
+  },
 
   writeByte(address, value) {
     switch (address & 0xF000) {
@@ -80,7 +78,7 @@ MMU = new class {
       default:
 
     }
-  }
+  },
 
   readByte(address, value) {
     switch (address & 0xF000) {
@@ -128,12 +126,7 @@ MMU = new class {
 
     }
   }
-
-
-  constructor() {
-
-  }
-}();
+};
 
 module.exports = {
   MMU,

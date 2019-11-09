@@ -1,15 +1,13 @@
-class CPU {
-  MMU = require("./components/memory").MMU;
-  ROM = require("./components/memory").ROM;
 
+class CPU {
+  ROM = require("./components/memory").ROM;
+  MMU = require("./components/memory").MMU;
   REGISTERS = require('./components/registers').REGISTERS;
   Operations = require('./components/operations');
 
   constructor() {}
 
   init() {
-
-
     // Initialize registers to standard values
     this.REGISTERS.AF = 0x01B0;
     this.REGISTERS.BC = 0x0013;
@@ -18,18 +16,6 @@ class CPU {
     this.REGISTERS.SP = 0xFFFE;
     this.REGISTERS.PC = 0x0100;
 
-
-    this.MMU.readByte(REGISTERS.F);
-    // console.log(REGISTERS);
-    // REGISTERS.print();
-    this.MMU.flags.SET(this.MMU.flags.ZERO);
-    // REGISTERS.print();
-    this.MMU.flags.SET(this.MMU.flags.CARRY);
-    // REGISTERS.print();
-    this.MMU.flags.CLEAR(this.MMU.flags.ZERO);
-    // REGISTERS.print();
-
-    // REGISTERS.print();
   }
 
   step(debug) {
@@ -38,7 +24,7 @@ class CPU {
     if (debug) {
       this.REGISTERS.print();
     }
-    this.Operations[ROM[this.REGISTERS.PC]](this.REGISTERS, this.ROM);
+    this.Operations[ROM[this.REGISTERS.PC]](this.REGISTERS, this.ROM, this.MMU);
     this.REGISTERS.PC++;
   }
 }

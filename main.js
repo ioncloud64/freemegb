@@ -35,7 +35,7 @@ function createWindow() {
     titlebarstyle: 'hidden',
     width: 800,
     height: 600,
-    icon: __dirname + '/resources/ioncloud64_512.png',
+    icon: __dirname + '/resources/freemegb.ico',
     webPreferences: {
       nodeIntegration: true
     }

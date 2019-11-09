@@ -53,7 +53,7 @@ class System extends EventEmitter {
         console.log();
         console.log("Emulator encountered an error:");
         this.cpu.REGISTERS.print();
-        console.log("ROM: 0x" + this.cpu.ROM[this.cpu.REGISTERS.PC].toString(16).toUpperCase().padStart(4, '0'));
+        console.log("ROM: 0x" + this.cpu.ROM[this.cpu.REGISTERS.PC].toString(16).toUpperCase().padStart(2, '0'));
         console.error(e);
         break;
       } finally {}
