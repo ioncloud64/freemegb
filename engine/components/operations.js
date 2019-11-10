@@ -1,6 +1,9 @@
 /**
  *  An array of functions that hold instructions for the CPU
  **/
+
+// TODO: Recode to JSON objects instead of functions
+
 const Operations = [
   // 0x00 NOP
   function(REGISTERS, ROM, MMU) {

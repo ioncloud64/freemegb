@@ -25,6 +25,8 @@ setTheme();
 
 // TODO: Create a poll every focus/minute for theme changes
 
+// TODO: Parse ROM for instructions first
+
 /**
 *  Creates the Electron Window
 **/
@@ -60,7 +62,7 @@ function createWindow() {
                 extensions: ['gb']
               }]
             },
-            function(fileNames) {
+            async function(fileNames) {
 
               // fileNames is an array that contains all the selected
               if (fileNames === undefined) {
