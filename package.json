@@ -9,7 +9,7 @@
     "build-darwin": "electron-packager . --platform=darwin --out dist/",
     "build-linux-deb": "electron-packager . --platform=linux --out dist/ && electron-installer-debian --src dist/freemegb-linux-x64/ --dest dist/installers --arch amd64 --config config.json",
     "build-all": "npm run build-win & npm run build-darwin & npm run build-linux-deb",
-    "clean": "rm -r dist",
+    "clean": "rm -r dist; rm -r obj; rm -r bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
