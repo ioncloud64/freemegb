@@ -33,27 +33,6 @@ func UI() {
 }
 
 func windowWidget() *gtk.Widget {
-	grid, err := gtk.GridNew()
-	if err != nil {
-		log.Fatal("Unable to create grid:", err)
-	}
-	grid.SetOrientation(gtk.ORIENTATION_VERTICAL)
-
-	topLabel, err = gtk.LabelNew("Text set by initializer")
-	if err != nil {
-		log.Fatal("Unable to create label:", err)
-	}
-	bottomLabel, err = gtk.LabelNew("Text set by initializer")
-	if err != nil {
-		log.Fatal("Unable to create label:", err)
-	}
-
-	grid.Add(topLabel)
-	grid.Add(bottomLabel)
-	topLabel.SetHExpand(true)
-	topLabel.SetVExpand(true)
-	bottomLabel.SetHExpand(true)
-	bottomLabel.SetVExpand(true)
 
 	return &grid.Container.Widget
 }
