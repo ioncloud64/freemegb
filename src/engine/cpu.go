@@ -4,7 +4,20 @@ import (
 	"engine/components"
 	"time"
 	"fmt"
+//	"log"
 )
+
+type INTERRUPTSType struct {
+	master	byte
+	enable	byte
+	flags	byte
+}
+
+var INTERRUPTS INTERRUPTSType = INTERRUPTSType {
+	master:		0x00,
+	enable:		0x00,
+	flags:		0x00,
+}
 
 /*
 	CPU Structure
@@ -14,19 +27,36 @@ import (
 */
 type CPUType struct {
 	INSTRUCTIONS	[]components.InstructionType
-	REGISTERS		components.RegistersType
+	REGISTERS		*components.RegistersType
+	DEBUG			bool
 }
 
 var CPU = CPUType {
 	INSTRUCTIONS:	components.INSTRUCTIONS,
-	REGISTERS:		components.REGISTERS,
+	REGISTERS:		&components.REGISTERS,
+	DEBUG:			false,
 }
 
-func (cpu *CPUType) Run(finished chan bool) {
-	for i := 0; i < 20; i++ {
+func (cpu *CPUType) Run(debug bool) {
+	cpu.DEBUG = debug
+	for ;; {
+		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
+			break
+		}
 		fmt.Println("CPU Step")
-		time.Sleep(1500 * time.Millisecond)
-		cpu.REGISTERS.Print()
+		if cpu.DEBUG {
+			cpu.REGISTERS.Print()
+			time.Sleep(time.Second)
+		} else {
+			time.Sleep(4 * time.Microsecond)
+		}
+		cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Exec()
+		cpu.REGISTERS.PC++
+		
 	}
-	finished <- true
+//	finished <- true
+}
+
+func (cpu *CPUType) Reset() {
+	
 }
