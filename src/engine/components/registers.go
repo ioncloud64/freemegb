@@ -2,6 +2,7 @@ package components
 
 import (
 	"fmt"
+//	"log"
 )
 
 type RegistersType struct {
@@ -11,6 +12,12 @@ type RegistersType struct {
 	HL	uint16
 	SP	uint16
 	PC	uint16
+	FLAGS struct {
+		ZERO byte
+	    SUBTRACT byte
+	    HALF_CARRY byte
+	    CARRY byte
+	}
 }
 
 /*
@@ -112,6 +119,18 @@ func (r *RegistersType) PrintRegister16(register uint16) {
 
 func (r *RegistersType) PrintRegister8(register byte) {
 	fmt.Println(fmt.Sprintf("8-bit Register: 0x%02X\n", register))
+}
+
+func (r *RegistersType) CombineTo16(lower byte, upper byte) uint16 {
+	return uint16(uint16(lower) << 8 | uint16(upper))
+}
+
+func (r *RegistersType) Add8(destination byte, source byte) byte {
+	return destination + source
+}
+
+func (r *RegistersType) Add16(destination uint16, source uint16) uint16 {
+	return destination + source
 }
 
 var REGISTERS = RegistersType {
