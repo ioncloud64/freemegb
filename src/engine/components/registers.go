@@ -2,21 +2,21 @@ package components
 
 import (
 	"fmt"
-//	"log"
 )
 
+// TODO: Finish Flags Structure and functions
 type RegistersType struct {
-	AF	uint16
-	BC	uint16
-	DE	uint16
-	HL	uint16
-	SP	uint16
-	PC	uint16
+	AF    uint16
+	BC    uint16
+	DE    uint16
+	HL    uint16
+	SP    uint16
+	PC    uint16
 	FLAGS struct {
-		ZERO byte
-	    SUBTRACT byte
-	    HALF_CARRY byte
-	    CARRY byte
+		ZERO       byte
+		SUBTRACT   byte
+		HALF_CARRY byte
+		CARRY      byte
 	}
 }
 
@@ -25,7 +25,7 @@ type RegistersType struct {
 */
 func (r *RegistersType) SetA(value byte) {
 	var F = r.AF & 0x00FF
-	r.AF = uint16(value) << 8 | F
+	r.AF = uint16(value)<<8 | F
 }
 func (r *RegistersType) A() byte {
 	return byte(r.AF >> 8)
@@ -36,7 +36,7 @@ func (r *RegistersType) A() byte {
 */
 func (r *RegistersType) SetF(value byte) {
 	var A = r.AF & 0xFF00
-	r.AF = A << 8 | uint16(value)
+	r.AF = A<<8 | uint16(value)
 }
 func (r *RegistersType) F() byte {
 	return byte(r.AF >> 8)
@@ -47,7 +47,7 @@ func (r *RegistersType) F() byte {
 */
 func (r *RegistersType) SetB(value byte) {
 	var C = r.BC & 0x00FF
-	r.BC = uint16(value) << 8 | C
+	r.BC = uint16(value)<<8 | C
 }
 func (r *RegistersType) B() byte {
 	return byte(r.BC >> 8)
@@ -58,19 +58,18 @@ func (r *RegistersType) B() byte {
 */
 func (r *RegistersType) SetC(value byte) {
 	var B = r.BC & 0xFF00
-	r.BC = B << 8 | uint16(value)
+	r.BC = B<<8 | uint16(value)
 }
 func (r *RegistersType) C() byte {
 	return byte(r.BC & 0x00FF)
 }
-
 
 /*
 	REGISTER D
 */
 func (r *RegistersType) SetD(value byte) {
 	var E = r.BC & 0x00FF
-	r.DE = uint16(value) << 8 | E
+	r.DE = uint16(value)<<8 | E
 }
 func (r *RegistersType) D() byte {
 	return byte(r.BC >> 8)
@@ -81,7 +80,7 @@ func (r *RegistersType) D() byte {
 */
 func (r *RegistersType) SetE(value byte) {
 	var D = r.DE & 0xFF00
-	r.DE = D << 8 | uint16(value)
+	r.DE = D<<8 | uint16(value)
 }
 func (r *RegistersType) E() byte {
 	return byte(r.BC & 0x00FF)
@@ -92,7 +91,7 @@ func (r *RegistersType) E() byte {
 */
 func (r *RegistersType) SetH(value byte) {
 	var L = r.HL & 0x00FF
-	r.HL = uint16(value) << 8 | L
+	r.HL = uint16(value)<<8 | L
 }
 func (r *RegistersType) H() byte {
 	return byte(r.HL >> 8)
@@ -103,26 +102,26 @@ func (r *RegistersType) H() byte {
 */
 func (r *RegistersType) SetL(value byte) {
 	var H = r.DE & 0xFF00
-	r.HL = H << 8 | uint16(value)
+	r.HL = H<<8 | uint16(value)
 }
 func (r *RegistersType) L() byte {
 	return byte(r.HL & 0x00FF)
 }
 
 func (r *RegistersType) Print() {
-	fmt.Printf("AF: 0x%04X\nBC: 0x%04X\nDE: 0x%04X\nHL: 0x%04X\nSP: 0x%04X\nPC: 0x%04X\n", r.AF, r.BC, r.DE, r.HL, r.SP, r.PC)
+	Logger.Printf("REGISTERS:\n\tAF: 0x%04X\n\tBC: 0x%04X\n\tDE: 0x%04X\n\tHL: 0x%04X\n\tSP: 0x%04X\n\tPC: 0x%04X\n", r.AF, r.BC, r.DE, r.HL, r.SP, r.PC)
 }
 
-func (r *RegistersType) PrintRegister16(register uint16) {
-	fmt.Println(fmt.Sprintf("16-bit Register: 0x%04X\n", register))
+func (r *RegistersType) Register16toString(register uint16) string {
+	return fmt.Sprintf("16-bit Register: 0x%04X\n", register)
 }
 
-func (r *RegistersType) PrintRegister8(register byte) {
-	fmt.Println(fmt.Sprintf("8-bit Register: 0x%02X\n", register))
+func (r *RegistersType) Register8toString(register byte) string {
+	return fmt.Sprintf("8-bit Register: 0x%02X\n", register)
 }
 
 func (r *RegistersType) CombineTo16(lower byte, upper byte) uint16 {
-	return uint16(uint16(lower) << 8 | uint16(upper))
+	return uint16(uint16(lower)<<8 | uint16(upper))
 }
 
 func (r *RegistersType) Add8(destination byte, source byte) byte {
@@ -133,12 +132,11 @@ func (r *RegistersType) Add16(destination uint16, source uint16) uint16 {
 	return destination + source
 }
 
-var REGISTERS = RegistersType {
+var REGISTERS = RegistersType{
 	AF: 0x01B0,
-	BC:	0x0013,
-	DE:	0x00D8,
-	HL:	0x014D,
-	SP:	0xFFFE,
-	PC:	0x0100,
+	BC: 0x0013,
+	DE: 0x00D8,
+	HL: 0x014D,
+	SP: 0xFFFE,
+	PC: 0x0100,
 }
-

@@ -2,21 +2,24 @@ package engine
 
 import (
 	"engine/components"
+	// "fmt"
 	"time"
-	"fmt"
-//	"log"
+	//	"log"
 )
 
+/*
+	Interrupts
+*/
 type INTERRUPTSType struct {
-	master	byte
-	enable	byte
-	flags	byte
+	master byte
+	enable byte
+	flags  byte
 }
 
-var INTERRUPTS INTERRUPTSType = INTERRUPTSType {
-	master:		0x00,
-	enable:		0x00,
-	flags:		0x00,
+var INTERRUPTS INTERRUPTSType = INTERRUPTSType{
+	master: 0x00,
+	enable: 0x00,
+	flags:  0x00,
 }
 
 /*
@@ -26,24 +29,27 @@ var INTERRUPTS INTERRUPTSType = INTERRUPTSType {
 	---> Registers Structure
 */
 type CPUType struct {
-	INSTRUCTIONS	[]components.InstructionType
-	REGISTERS		*components.RegistersType
-	DEBUG			bool
+	INSTRUCTIONS []components.InstructionType
+	REGISTERS    *components.RegistersType
+	DEBUG        bool
 }
 
-var CPU = CPUType {
-	INSTRUCTIONS:	components.INSTRUCTIONS,
-	REGISTERS:		&components.REGISTERS,
-	DEBUG:			false,
+var CPU = CPUType{
+	INSTRUCTIONS: components.INSTRUCTIONS,
+	REGISTERS:    &components.REGISTERS,
+	DEBUG:        false,
 }
 
 func (cpu *CPUType) Run(debug bool) {
 	cpu.DEBUG = debug
-	for ;; {
+	for {
 		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
+			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
+			components.Logger.Fatalf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
+				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
 			break
 		}
-		fmt.Println("CPU Step")
+		components.Logger.Println("CPU Step")
 		if cpu.DEBUG {
 			cpu.REGISTERS.Print()
 			time.Sleep(time.Second)
@@ -52,11 +58,11 @@ func (cpu *CPUType) Run(debug bool) {
 		}
 		cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Exec()
 		cpu.REGISTERS.PC++
-		
+
 	}
-//	finished <- true
+	//	finished <- true
 }
 
 func (cpu *CPUType) Reset() {
-	
+
 }

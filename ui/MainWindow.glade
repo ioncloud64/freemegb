@@ -5,7 +5,7 @@
     <property name="width_request">800</property>
     <property name="height_request">600</property>
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">FreeMe!GB</property>
+    <property name="title" translatable="yes">FreeMe!GB Debugger</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="icon">freemegb.png</property>
@@ -50,6 +50,8 @@
                             <property name="can_focus">False</property>
                             <property name="filter">recentRomsFilter</property>
                             <property name="limit">10</property>
+                            <property name="show_not_found">False</property>
+                            <property name="sort_type">mru</property>
                           </object>
                         </child>
                       </object>
@@ -159,7 +161,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkMenuItem" id="menuAbout">
+                      <object class="GtkMenuItem" id="menuItemAbout">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">About</property>
@@ -168,7 +170,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="menuHelp1">
+                      <object class="GtkMenuItem" id="menuItemHelp">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Help</property>
@@ -204,6 +206,7 @@
                     <property name="can_focus">True</property>
                     <property name="vscroll_policy">natural</property>
                     <property name="model">romListStore</property>
+                    <property name="fixed_height_mode">True</property>
                     <property name="show_expanders">False</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection2"/>
@@ -223,6 +226,7 @@
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                        <property name="spacing">1</property>
                         <property name="sizing">fixed</property>
                         <property name="title" translatable="yes">Instruction</property>
                         <property name="expand">True</property>
@@ -314,12 +318,19 @@
           </packing>
         </child>
         <child>
-          <object class="GtkTextView" id="textViewConsole">
+          <object class="GtkScrolledWindow" id="scrolledwindow2">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="editable">False</property>
-            <property name="cursor_visible">False</property>
-            <property name="accepts_tab">False</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTextView" id="textViewConsole">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="editable">False</property>
+                <property name="cursor_visible">False</property>
+                <property name="accepts_tab">False</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -328,16 +339,43 @@
           </packing>
         </child>
         <child>
-          <object class="GtkProgressBar" id="romProgressBar">
+          <object class="GtkBox" id="box2">
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can_focus">False</property>
-            <property name="pulse_step">0.01</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
+            <property name="margin_bottom">6</property>
+            <child>
+              <object class="GtkProgressBar" id="romProgressBar">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="pulse_step">0.01</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="image1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">freemegb20.png</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">4</property>
+            <property name="position">6</property>
           </packing>
         </child>
       </object>
