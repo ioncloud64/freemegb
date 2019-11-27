@@ -1,11 +1,11 @@
 package main
 
 import (
-	//	"fmt"
 	"engine"
-	//	"reflect"
+	"engine/components"
 	"errors"
-	"log"
+	"fmt"
+	"strings"
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -16,6 +16,10 @@ const AppID = "com.ioncloud64.freemegb"
 func main() {
 	var System = engine.System
 
+	fmt.Println(components.LogFilename)
+
+	defer components.LogFile.Close()
+
 	UI(&System)
 }
 
@@ -24,10 +28,10 @@ func UI(System *engine.SystemType) {
 	UIErrorCheck(err)
 
 	app.Connect("startup", func() {
-		log.Println("FreeMe!GB is starting up...")
+		components.Logger.Println("FreeMe!GB is starting up...")
 	})
 	app.Connect("activate", func() {
-		log.Println("FreeMe!GB is activated...")
+		components.Logger.Println("FreeMe!GB is activated...")
 
 		builder, err := gtk.BuilderNewFromFile("ui/MainWindow.glade")
 		UIErrorCheck(err)
@@ -70,22 +74,64 @@ func UI(System *engine.SystemType) {
 		menuRun.Connect("activate", func() {
 			go System.CPU.Run(false)
 		})
-		
+
+		menuAbout, err := builder.GetObject("menuItemAbout")
+		UIErrorCheck(err)
+
+		menuItemAbout, err := IsMenuItem(menuAbout)
+		UIErrorCheck(err)
+
+		menuItemAbout.Connect("activate", func() {
+			builder, err := gtk.BuilderNewFromFile("ui/AboutDialog.glade")
+			UIErrorCheck(err)
+
+			obj, err := builder.GetObject("aboutDialog")
+			UIErrorCheck(err)
+
+			aboutDialog, err := IsAboutDialog(obj)
+			UIErrorCheck(err)
+
+			result := aboutDialog.Run()
+			if result == gtk.RESPONSE_CLOSE || result == gtk.RESPONSE_DELETE_EVENT {
+				aboutDialog.Close()
+			}
+
+		})
+
+		menuSettings, err := builder.GetObject("menuSettings")
+		UIErrorCheck(err)
+
+		menuItemSettings, err := IsMenuItem(menuSettings)
+		UIErrorCheck(err)
+
+		menuItemSettings.Connect("activate", func() {
+			builder, err := gtk.BuilderNewFromFile("ui/SettingsWindow.glade")
+			UIErrorCheck(err)
+
+			obj, err := builder.GetObject("SettingsWindow")
+			UIErrorCheck(err)
+
+			settingsWindow, err := IsWindow(obj)
+			UIErrorCheck(err)
+
+			settingsWindow.Show()
+		})
+
 		romList, err := builder.GetObject("romListStore")
 		UIErrorCheck(err)
-		
+
 		romListStore, err := IsListStore(romList)
 		UIErrorCheck(err)
-		
+
 		romTree, err := builder.GetObject("romTreeStore")
 		UIErrorCheck(err)
-		
+
 		romTreeStore, err := IsTreeView(romTree)
 		UIErrorCheck(err)
-		
+
 		romProgress, err := builder.GetObject("romProgressBar")
 		UIErrorCheck(err)
-		
+
 		romProgressBar, err := IsProgressBar(romProgress)
 		UIErrorCheck(err)
 
@@ -122,18 +168,35 @@ func UI(System *engine.SystemType) {
 				romFileChooserDialog.Response(gtk.RESPONSE_ACCEPT)
 			})
 
+			romFileChooserDialog.Connect("file-activated", func() {
+				romFileChooserDialog.Response(gtk.RESPONSE_ACCEPT)
+			})
+
 			var result = romFileChooserDialog.Run()
 			if result == gtk.RESPONSE_ACCEPT {
 				ROMfile := romFileChooserDialog.GetFilename()
-				log.Println(ROMfile)
+				components.Logger.Println(ROMfile)
 				romFileChooserDialog.Close()
 				// Do not block UI execution
 				go System.LoadROM(string(ROMfile), romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 			} else if result == gtk.RESPONSE_CANCEL {
-				log.Println("Cancelling")
+				components.Logger.Println("Cancelling")
 				romFileChooserDialog.Close()
 			}
 
+		})
+
+		recentROMsmenu, err := builder.GetObject("recentRoms")
+		UIErrorCheck(err)
+
+		recentROMs := recentROMsmenu.(*gtk.RecentChooserMenu)
+
+		recentROMs.Connect("item-activated", func() {
+			// gotk3 doesn't provide ALL GTK bindings, I am using the slicing operator to cut off file:///
+			// This gets a uri, i.e. with url escape characters for spaces and special characters
+			// strings.ReplaceAll() is required for this operation
+			var romLoc string = strings.ReplaceAll(recentROMs.GetCurrentUri()[8:], "%20", " ")
+			go System.LoadROM(romLoc, romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 		})
 
 		menuQuit, err := builder.GetObject("menuQuit")
@@ -153,9 +216,9 @@ func UI(System *engine.SystemType) {
 		app.AddWindow(win)
 	})
 	app.Connect("shutdown", func() {
-		log.Println("FreeMe!GB is shutting down...")
+		components.Logger.Println("FreeMe!GB is shutting down...")
 	})
-	
+
 	app.Run(nil)
 }
 
@@ -181,6 +244,14 @@ func IsFileChooserDialog(obj glib.IObject) (*gtk.FileChooserDialog, error) {
 		return dialog, nil
 	}
 	return nil, errors.New("not a *gtk.FileChooserDialog")
+}
+
+func IsAboutDialog(obj glib.IObject) (*gtk.AboutDialog, error) {
+	// Make type assertion (as per gtk.go).
+	if dialog, ok := obj.(*gtk.AboutDialog); ok {
+		return dialog, nil
+	}
+	return nil, errors.New("not a *gtk.AboutDialog")
 }
 
 func IsButton(obj glib.IObject) (*gtk.Button, error) {
@@ -218,7 +289,7 @@ func IsProgressBar(obj glib.IObject) (*gtk.ProgressBar, error) {
 func UIErrorCheck(err error) {
 	if err != nil {
 		// panic for any errors.
-		log.Panic(err)
+		components.Logger.Panic(err)
 	}
 }
 

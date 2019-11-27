@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkAboutDialog" id="aboutdialog1">
+  <object class="GtkAboutDialog" id="aboutDialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">FreeMe!GB</property>
@@ -13,6 +13,25 @@
     <property name="urgency_hint">True</property>
     <property name="has_resize_grip">False</property>
     <property name="program_name">FreeMe!GB</property>
+    <property name="version">0.0.1-alpha</property>
+    <property name="copyright" translatable="yes">GameBoy® is a registered trademark under the Nintendo Coporation,
+all rights reserved.</property>
+    <property name="comments" translatable="yes">FreeMe!GB is a GameBoy simulator that has seen multiple program language iterations. Currently, the latest iteration is in Go. Previous iterations include, C++ (Qt, then GTK) and Node.js (Electron.js)</property>
+    <property name="website">https://freemegb.ioncloud64.com</property>
+    <property name="website_label" translatable="yes">FreeMe!GB Website</property>
+    <property name="license" translatable="yes">Copyright 2020 ioncloud64
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</property>
+    <property name="authors">ioncloud64</property>
+    <property name="documenters">ioncloud64</property>
+    <property name="translator_credits" translatable="yes">ioncloud64</property>
+    <property name="artists">ioncloud64</property>
     <property name="logo">freemegb.png</property>
     <property name="license_type">bsd</property>
     <child internal-child="vbox">

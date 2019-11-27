@@ -1,1 +1,2 @@
 *.go -text diff=golang
+*.glade -text diff=xml
