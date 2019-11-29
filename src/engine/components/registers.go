@@ -4,6 +4,13 @@ import (
 	"fmt"
 )
 
+type FlagsType struct {
+	ZERO       byte
+	SUBTRACT   byte
+	HALF_CARRY byte
+	CARRY      byte
+}
+
 // TODO: Finish Flags Structure and functions
 type RegistersType struct {
 	AF    uint16
@@ -12,12 +19,7 @@ type RegistersType struct {
 	HL    uint16
 	SP    uint16
 	PC    uint16
-	FLAGS struct {
-		ZERO       byte
-		SUBTRACT   byte
-		HALF_CARRY byte
-		CARRY      byte
-	}
+	FLAGS FlagsType
 }
 
 /*
@@ -132,6 +134,18 @@ func (r *RegistersType) Add16(destination uint16, source uint16) uint16 {
 	return destination + source
 }
 
+func (r *RegistersType) FLAG_SET(flag byte) {
+	r.SetF(r.F() | flag)
+}
+
+func (r *RegistersType) FLAG_ISSET(flag byte) bool {
+	return (r.F() & flag) != 0
+}
+
+func (r *RegistersType) FLAG_CLEAR(flag byte) {
+	r.SetF(r.F() & ^flag)
+}
+
 var REGISTERS = RegistersType{
 	AF: 0x01B0,
 	BC: 0x0013,
@@ -139,4 +153,10 @@ var REGISTERS = RegistersType{
 	HL: 0x014D,
 	SP: 0xFFFE,
 	PC: 0x0100,
+	FLAGS: FlagsType{
+		ZERO:       0x80,
+		SUBTRACT:   0x40,
+		HALF_CARRY: 0x20,
+		CARRY:      0x10,
+	},
 }
