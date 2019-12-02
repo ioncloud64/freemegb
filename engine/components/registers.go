@@ -127,11 +127,35 @@ func (r *RegistersType) CombineTo16(lower byte, upper byte) uint16 {
 }
 
 func (r *RegistersType) Add8(destination byte, source byte) byte {
-	return destination + source
+	result := destination + source
+
+	if result&0xFF != 0 {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	destination = result & 0xFF
+
+	if destination != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+
+	if ((destination & 0x0F) + (source & 0x0F)) > 0x0F {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	r.FLAG_CLEAR(r.FLAGS.SUBTRACT)
+
+	return result
 }
 
-func (r *RegistersType) Add16(destination uint16, source uint16) uint16 {
-	return destination + source
+func (r *RegistersType) Add16(destination uint16, source uint16) {
+	// destination + source
 }
 
 func (r *RegistersType) FLAG_SET(flag byte) {

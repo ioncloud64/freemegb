@@ -27,6 +27,8 @@ func UI(System *engine.SystemType) {
 	app, err := gtk.ApplicationNew(AppID, glib.APPLICATION_FLAGS_NONE)
 	UIErrorCheck(err)
 
+	components.AppRef = app
+
 	app.Connect("startup", func() {
 		components.Logger.Println("FreeMe!GB is starting up...")
 	})
