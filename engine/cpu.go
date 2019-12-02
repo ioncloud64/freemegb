@@ -4,7 +4,8 @@ import (
 	"engine/components"
 	// "fmt"
 	"time"
-	//	"log"
+
+	"github.com/gotk3/gotk3/glib"
 )
 
 /*
@@ -45,8 +46,11 @@ func (cpu *CPUType) Run(debug bool) {
 	for {
 		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
-			components.Logger.Fatalf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
+			components.Logger.Println("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
+			notif := glib.NotificationNew("Title")
+			notif.SetBody("Text")
+			components.AppRef.SendNotification("com.ioncloud64.freemegb", notif)
 			break
 		}
 		components.Logger.Println("CPU Step")
