@@ -1,4 +1,4 @@
-package engine
+package github.com/ioncloud64/freemegb/engine
 
 import (
 	"fmt"
