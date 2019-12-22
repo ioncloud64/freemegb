@@ -1,8 +1,8 @@
 package main
 
 import (
-	"engine"
-	"engine/components"
+	"github.com/ioncloud64/freemegb/engine"
+	"github.com/ioncloud64/freemegb/engine/components"
 	"errors"
 	"fmt"
 	"strings"
