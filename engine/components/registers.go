@@ -1,4 +1,4 @@
-package github.com/ioncloud64/freemegb/engine/components
+package components
 
 import (
 	"fmt"
