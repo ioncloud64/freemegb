@@ -1,4 +1,4 @@
-package components
+package github.com/ioncloud64/freemegb/engine/components
 
 import (
 	"log"
