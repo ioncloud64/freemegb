@@ -1,7 +1,7 @@
 package engine
 
 import (
-	"engine/components"
+	"github.com/ioncloud64/freemegb/engine/components"
 	"io/ioutil"
 
 	// "log"
