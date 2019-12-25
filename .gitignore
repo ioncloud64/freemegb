@@ -6,3 +6,4 @@ bin/
 *.rpm
 *.pkg
 *.log
+*.syso
