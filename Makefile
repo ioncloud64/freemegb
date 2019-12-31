@@ -5,7 +5,7 @@ os := $(shell go env GOOS)
 
 .PHONY: all
 # linux_i386 linux_amd64 additional gcc targets
-all:	clean linux_arm windows_i386 windows_amd64
+all:	clean cross-tools linux_i386 linux_amd64 linux_arm windows_i386 windows_amd64
 
 windows_amd64:
 	windres --input=freemegb_windows.rc --output=freemegb_windows.syso
@@ -22,6 +22,15 @@ endif
 linux_arm:
 	GOOS=linux GOARCH=arm go build -v -o bin/linux_arm/freemegb
 	cp -rf ui bin/linux_arm
+linux_i386:
+	GOOS=linux GOARCH=386 go build -v -o bin/linux_i386/freemegb
+	cp -rf ui bin/linux_i386
+linux_amd64:
+	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
+	cp -rf ui bin/linux_amd64
+host:
+	go build -v -o bin/$(os)_$(arch)/freemegb
+	cp -rf ui bin/$(os)_$(arch)
 clean:
 	rm -rf bin
 	rm -f *.syso
