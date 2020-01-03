@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git commit -S -m $1
+git commit -S -m "$1"
