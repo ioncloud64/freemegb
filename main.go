@@ -32,6 +32,7 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 }
 
 func main() {
+	components.Init()
 	var System = engine.System
 
 	fmt.Println(components.LogFilename)
