@@ -1,5 +1,7 @@
 pkg/
 bin/
+build/
+dist/
 
 *.exe
 *.deb

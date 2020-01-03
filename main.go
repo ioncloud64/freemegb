@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"os"
+	"runtime"
 
-	"github.com/ioncloud64/freemegb/engine"
-	"github.com/ioncloud64/freemegb/engine/components"
+	"github.com/ioncloud64/freemegb/core"
+	"github.com/ioncloud64/freemegb/core/components"
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -20,11 +22,11 @@ type UITextView struct {
 }
 
 func (TV *UITextView) Write(data []byte) (n int, err error) {
-	buff, err := TV.TextView.GetBuffer()
-	text, err := buff.GetText(buff.GetStartIter(),
-		buff.GetEndIter(), true)
-	buff.SetText(text + string(data))
-	// TODO: Fix log automatic scrolling on GTK
+	// TODO: Implement proper TextView Console
+	// buff, err := TV.TextView.GetBuffer()
+	// text, err := buff.GetText(buff.GetStartIter(),
+	// 	buff.GetEndIter(), true)
+	// buff.SetText(text + string(data))
 	// TV.TextView.ScrollToIter(buff.GetEndIter(), 0.0, true, 0.5, 0.5)
 	// var mark = buff.CreateMark("end", buff.GetEndIter(), false)
 	// TV.TextView.ScrollToMark(mark, 0.0, false, 0.5, 0.5)
@@ -32,8 +34,11 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 }
 
 func main() {
+	if runtime.GOOS == "linux" {
+		os.Chdir("/usr/share/freemegb")
+	}
 	components.Init()
-	var System = engine.System
+	var System = core.System
 
 	fmt.Println(components.LogFilename)
 
@@ -42,7 +47,7 @@ func main() {
 	UI(&System)
 }
 
-func UI(System *engine.SystemType) {
+func UI(System *core.SystemType) {
 	app, err := gtk.ApplicationNew(AppID, glib.APPLICATION_FLAGS_NONE)
 	UIErrorCheck(err)
 
@@ -230,7 +235,8 @@ func UI(System *engine.SystemType) {
 			// gotk3 doesn't provide ALL GTK bindings, I am using the slicing operator to cut off file:///
 			// This gets a uri, i.e. with url escape characters for spaces and special characters
 			// strings.ReplaceAll() is required for this operation
-			var romLoc string = strings.ReplaceAll(recentROMs.GetCurrentUri()[8:], "%20", " ")
+			var romLoc string = strings.ReplaceAll(recentROMs.GetCurrentUri()[7:], "%20", " ")
+			fmt.Println(romLoc)
 			go System.LoadROM(romLoc, romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 		})
 

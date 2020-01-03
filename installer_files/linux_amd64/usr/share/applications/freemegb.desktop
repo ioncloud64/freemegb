@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=0.0.1
+Name=FreeMe!GB
+GenericName=GameBoy Emulator
+Exec=/usr/bin/freemegb
+StartupNotify=true
+Terminal=false
+Icon=freemegb
+Type=Application
+Categories=Games;
+MimeType=
+Actions=
+

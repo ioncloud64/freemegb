@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>freemegb.desktop</id>
+  <update_contact>admin@ioncloud64</update_contact>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license></project_license>
+  <name>FreeMe!GB</name>
+  <summary>A GameBoy simulator written in Go. GUI bindings are written in for GTK+. This program is designed to simulate the real hardware that was equipped in the system itself.</summary>
+  <description>
+    <p>
+	FreeMe!GB is a GameBoy simulator that has seen multiple program language iterations. Currently, 
+	the latest iteration is in Go. Previous iterations include, C++ (Qt, then GTK) and Node.js (Electron.js)
+   </p>
+  </description>
+  <url type="homepage">https://freemegb.ioncloud64.com/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://www.gstatic.com/chrome/appstream/chrome-2.png</image>
+      <caption/>
+    </screenshot>
+  </screenshots>
+  <translation/>
+  <developer_name>ioncloud64</developer_name>
+  <url type="bugtracker">https://github.com/ioncloud64/freemegb/issues</url>
+  <url type="help">https://github.com/ioncloud64/freemegb/wiki</url>
+</component>
+

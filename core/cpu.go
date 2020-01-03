@@ -1,9 +1,11 @@
-package engine
+package core
 
 import (
 	"time"
-
-	"github.com/ioncloud64/freemegb/engine/components"
+	"runtime"
+	"fmt"
+	"github.com/gotk3/gotk3/glib"
+	"github.com/ioncloud64/freemegb/core/components"
 )
 
 /*
@@ -47,15 +49,19 @@ func (cpu *CPUType) Run(debug bool) {
 			components.Logger.Printf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
 			// TODO: Add OS Switch for glib notifications in linux
-			// notif := glib.NotificationNew("Title")
-			// notif.SetBody("Text")
-			// components.AppRef.SendNotification("com.ioncloud64.freemegb", notif)
+			if runtime.GOOS == "linux" {
+				notif := glib.NotificationNew("FreeMe!GB: Unknown Instruction")
+				notif.SetBody(fmt.Sprintf("UNKNOWN INSTRUCTION:\nINSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+					cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString))
+				notif.SetIcon("ui/freemegb.png")
+				components.AppRef.SendNotification("com.ioncloud64.freemegb", notif)
+			}
 			break
 		}
 		components.Logger.Println("CPU Step")
 		if cpu.DEBUG {
 			cpu.REGISTERS.Print()
-			time.Sleep(time.Second)
+			// time.Sleep(time.Second)
 		} else {
 			time.Sleep(4 * time.Microsecond)
 		}

@@ -1,7 +1,8 @@
 # TODO: Create Makefile to automate deployment
 
-arch := $(shell go env GOARCH)
-os := $(shell go env GOOS)
+arch	:= $(shell go env GOARCH)
+os	:= $(shell go env GOOS)
+version	:= $(shell cat VERSION)
 
 .PHONY: all
 # linux_i386 linux_amd64 additional gcc targets
@@ -29,8 +30,21 @@ linux_amd64:
 	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
 host:
-	go build -v -o bin/$(os)_$(arch)/freemegb
-	cp -rf ui bin/$(os)_$(arch)
+	go build -v -o bin/freemegb-$(version)_$(arch)/freemegb
+	cp -rf ui bin/freemegb-$(version)_$(arch)
+host_deb:
+	mkdir -p build/freemegb-$(version)_$(arch)
+	cp -rf installer_files/$(os)_$(arch)/* build/freemegb-$(version)_$(arch)
+	mkdir -p build/freemegb-$(version)_$(arch)/usr/bin/
+	cp bin/freemegb-$(version)_$(arch)/freemegb build/freemegb-$(version)_$(arch)/usr/bin/
+	mkdir -p build/freemegb-$(version)_$(arch)/usr/share/freemegb
+	cp -rf ui build/freemegb-$(version)_$(arch)/usr/share/freemegb
+	sudo chown -R root:root build/freemegb-$(version)_$(arch)/
+	mkdir dist
+	dpkg -b build/freemegb-$(version)_$(arch)
+	mv build/freemegb-$(version)_$(arch).deb dist
 clean:
 	rm -rf bin
+	sudo rm -rf build
+	sudo rm -rf dist
 	rm -f *.syso
