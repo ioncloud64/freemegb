@@ -1,0 +1,6 @@
+?package(freemegb-0.0.1):needs="x11" \
+  section="Applications/Games" \
+  hints="Emulator" \
+  title="FreeMe!GB" \
+  icon="/usr/share/freemegb/ui/freemegb_32.xpm" \
+  command="/usr/bin/freemegb"

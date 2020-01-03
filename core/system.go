@@ -1,9 +1,9 @@
-package engine
+package core
 
 import (
 	"io/ioutil"
 
-	"github.com/ioncloud64/freemegb/engine/components"
+	"github.com/ioncloud64/freemegb/core/components"
 
 	"time"
 

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Add icons to the system icons
+XDG_ICON_RESOURCE="`which xdg-icon-resource 2> /dev/null || true`"
+if [ ! -x "$XDG_ICON_RESOURCE" ]; then
+  echo "Error: Could not find xdg-icon-resource" >&2
+  exit 1
+fi
+for icon in freemegb16.png freemegb24.png freemegb32.png freemegb48.png freemegb64.png freemegb128.png freemegb256.png ; do
+  size="$(echo ${icon} | sed 's/[^0-9]//g')"
+  "$XDG_ICON_RESOURCE" install --size "${size}" "/usr/share/freemegb/ui/${icon}" \
+    "freemegb"
+done
