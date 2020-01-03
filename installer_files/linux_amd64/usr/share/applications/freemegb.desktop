@@ -5,9 +5,8 @@ GenericName=GameBoy Emulator
 Exec=/usr/bin/freemegb
 StartupNotify=true
 Terminal=false
-Icon=freemegb
+Icon=ioncloud64-freemegb
 Type=Application
 Categories=Games;
 MimeType=
 Actions=
-
