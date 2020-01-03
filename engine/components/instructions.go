@@ -17,16 +17,16 @@ type InstructionType struct {
 var INSTRUCTIONS = []InstructionType{
 	// 0x00 - NOP
 	{
-		func() {},
-		0x00,
-		"NOP",
-		0,
-		[]byte{},
-		4,
+		Exec:        func() {},
+		Opcode:      0x00,
+		Name:        "NOP",
+		NumOperands: 0,
+		Operands:    []byte{},
+		Cycles:      4,
 	},
 	// 0x01 - LOAD BC NN
 	{
-		func() {
+		Exec: func() {
 			// When transferring the code from JS to Go
 			// prefix ++ does not work on type uint16
 
@@ -34,20 +34,20 @@ var INSTRUCTIONS = []InstructionType{
 			REGISTERS.BC = REGISTERS.CombineTo16(ROMref[REGISTERS.PC], ROMref[REGISTERS.PC+1])
 			REGISTERS.PC++
 		},
-		0x01,         // opcode
-		"LOAD BC NN", // name
-		2,            // number of operands
-		[]byte{},     // operands
-		12,           // cpu cycles
+		Opcode:      0x01,         // opcode
+		Name:        "LOAD BC NN", // name
+		NumOperands: 2,            // number of operands
+		Operands:    []byte{},     // operands
+		Cycles:      12,           // cpu cycles
 	},
 	// 0x02 - LOAD BC NN
 	{
-		func() { fmt.Println("LOAD BC NN") }, // executed code
-		0x02,                                 // opcode
-		"LOAD BC NN",                         // name
-		0,                                    // number of operands
-		[]byte{},                             // operands
-		4,                                    // cpu cycles
+		Exec:        func() { fmt.Println("LOAD BC NN") }, // executed code
+		Opcode:      0x02,                                 // opcode
+		Name:        "LOAD BC NN",                         // name
+		NumOperands: 0,                                    // number of operands
+		Operands:    []byte{},                             // operands
+		Cycles:      4,                                    // cpu cycles
 	},
 	// 0x03 - UNKNOWN
 	{

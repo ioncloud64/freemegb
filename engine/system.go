@@ -1,14 +1,13 @@
 package engine
 
 import (
-	"github.com/ioncloud64/freemegb/engine/components"
 	"io/ioutil"
 
-	// "log"
+	"github.com/ioncloud64/freemegb/engine/components"
+
 	"time"
 
 	"github.com/gotk3/gotk3/gtk"
-	//	"github.com/gotk3/gotk3/glib"
 )
 
 /*

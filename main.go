@@ -1,17 +1,35 @@
 package main
 
 import (
-	"github.com/ioncloud64/freemegb/engine"
-	"github.com/ioncloud64/freemegb/engine/components"
 	"errors"
 	"fmt"
+	"io"
 	"strings"
+
+	"github.com/ioncloud64/freemegb/engine"
+	"github.com/ioncloud64/freemegb/engine/components"
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 )
 
 const AppID = "com.ioncloud64.freemegb"
+
+type UITextView struct {
+	TextView *gtk.TextView
+}
+
+func (TV *UITextView) Write(data []byte) (n int, err error) {
+	buff, err := TV.TextView.GetBuffer()
+	text, err := buff.GetText(buff.GetStartIter(),
+		buff.GetEndIter(), true)
+	buff.SetText(text + string(data))
+	// TODO: Fix log automatic scrolling on GTK
+	// TV.TextView.ScrollToIter(buff.GetEndIter(), 0.0, true, 0.5, 0.5)
+	// var mark = buff.CreateMark("end", buff.GetEndIter(), false)
+	// TV.TextView.ScrollToMark(mark, 0.0, false, 0.5, 0.5)
+	return len(data), err
+}
 
 func main() {
 	var System = engine.System
@@ -66,6 +84,20 @@ func UI(System *engine.SystemType) {
 		menuDebug, err := IsMenuItem(menuDebugObj)
 		UIErrorCheck(err)
 
+		// Console
+		consoleObj, err := builder.GetObject("textViewConsole")
+		UIErrorCheck(err)
+
+		console, err := IsTextView(consoleObj)
+		UIErrorCheck(err)
+
+		var consoleUI = UITextView{
+			TextView: console,
+		}
+
+		multiWriter := io.MultiWriter(components.Logger.Writer(), &consoleUI)
+
+		components.Logger.SetOutput(multiWriter)
 		// Run MenuItem
 		menuRunObj, err := builder.GetObject("menuRun")
 		UIErrorCheck(err)
@@ -286,6 +318,14 @@ func IsProgressBar(obj glib.IObject) (*gtk.ProgressBar, error) {
 		return item, nil
 	}
 	return nil, errors.New("not a *gtk.ProgressBar")
+}
+
+func IsTextView(obj glib.IObject) (*gtk.TextView, error) {
+	// Make type assertion (as per gtk.go).
+	if item, ok := obj.(*gtk.TextView); ok {
+		return item, nil
+	}
+	return nil, errors.New("not a *gtk.TextView")
 }
 
 func UIErrorCheck(err error) {
