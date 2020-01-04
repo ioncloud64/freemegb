@@ -6,7 +6,7 @@ version	:= $(shell cat VERSION)
 
 .PHONY: all
 # linux_i386 linux_amd64 additional gcc targets
-all:	clean cross-tools linux_i386 linux_amd64 linux_arm windows_i386 windows_amd64
+all: clean host #cross-tools linux_i386 linux_amd64 linux_arm windows_i386 windows_amd64
 
 windows_amd64:
 	windres --input=freemegb_windows.rc --output=freemegb_windows.syso
