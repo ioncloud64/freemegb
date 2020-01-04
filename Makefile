@@ -1,7 +1,7 @@
 # TODO: Create Makefile to automate deployment
-
-arch	:= $(shell go env GOARCH)
-os	:= $(shell go env GOOS)
+GTK			?= gtk_3_20
+arch		:= $(shell go env GOARCH)
+os			:= $(shell go env GOOS)
 version	:= $(shell cat VERSION)
 
 .PHONY: all
@@ -29,6 +29,9 @@ linux_i386:
 linux_amd64:
 	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
+travisci:
+	go get -t -tags gtk_$GTK_VERSION ./...
+	cp -rf ui bin/freemegb-$(version)_$(arch)
 host:
 	go build -v -o bin/freemegb-$(version)_$(arch)/freemegb
 	cp -rf ui bin/freemegb-$(version)_$(arch)
