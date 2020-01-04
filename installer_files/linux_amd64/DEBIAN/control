@@ -1,5 +1,5 @@
-Package: freemegb-0.0.1-alpha
-Version: 0.0.1
+Package: freemegb-0.0.2-alpha
+Version: 0.0.2
 Architecture: amd64
 Maintainer: ioncloud64 <admin@ioncloud64.com>
 Depends:
@@ -9,4 +9,3 @@ Description: A GameBoy Emulator.
  A GameBoy simulator that has seen multiple program language iterations.
  Currently, the latest iteration is in Go. Previous iterations include,
  C++ (Qt, then GTK) and Node.js (Electron.js)
-
