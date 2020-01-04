@@ -2,11 +2,12 @@
 Version=0.0.1
 Name=FreeMe!GB
 GenericName=GameBoy Emulator
-Exec=/usr/bin/freemegb
+Exec=/usr/bin/freemegb --gapplication-service
 StartupNotify=true
 Terminal=false
 Icon=ioncloud64-freemegb
 Type=Application
+DBusActivatable=true
 Categories=Games;
 MimeType=
 Actions=

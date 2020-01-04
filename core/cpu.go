@@ -54,7 +54,7 @@ func (cpu *CPUType) Run(debug bool) {
 				notif.SetBody(fmt.Sprintf("UNKNOWN INSTRUCTION:\nINSTRUCTION: 0x%02X\nAt ROM Offset: %s",
 					cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString))
 				notif.SetIcon("ui/freemegb.png")
-				components.AppRef.SendNotification("com.ioncloud64.freemegb", notif)
+				components.AppRef.SendNotification("freemegb-unknown-instruction", notif)
 			}
 			break
 		}

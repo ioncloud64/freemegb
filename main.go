@@ -260,7 +260,7 @@ func UI(System *core.SystemType) {
 		components.Logger.Println("FreeMe!GB is shutting down...")
 	})
 
-	app.Run(nil)
+	app.Run(os.Args[1:])
 }
 
 func IsWindow(obj glib.IObject) (*gtk.Window, error) {
