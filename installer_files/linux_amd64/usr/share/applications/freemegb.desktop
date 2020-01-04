@@ -1,5 +1,5 @@
 [Desktop Entry]
-Version=0.0.3
+Version=0.0.4
 Name=FreeMe!GB
 GenericName=GameBoy Emulator
 Exec=/usr/bin/freemegb --gapplication-service
@@ -11,3 +11,4 @@ DBusActivatable=true
 Categories=Games;
 MimeType=
 Actions=
+X-GNOME-UsesNotifications=true

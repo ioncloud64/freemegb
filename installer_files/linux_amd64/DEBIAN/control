@@ -1,5 +1,5 @@
-Package: freemegb-0.0.3-alpha
-Version: 0.0.3
+Package: freemegb-0.0.4-alpha
+Version: 0.0.4
 Architecture: amd64
 Maintainer: ioncloud64 <admin@ioncloud64.com>
 Depends:
