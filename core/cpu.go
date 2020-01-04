@@ -4,8 +4,11 @@ import (
 	"time"
 	"runtime"
 	"fmt"
-	"github.com/gotk3/gotk3/glib"
+	// "log"
+	// "github.com/gotk3/gotk3/glib"
 	"github.com/ioncloud64/freemegb/core/components"
+	"github.com/esiqveland/notify"
+	"github.com/godbus/dbus"
 )
 
 /*
@@ -50,11 +53,24 @@ func (cpu *CPUType) Run(debug bool) {
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
 			// TODO: Add OS Switch for glib notifications in linux
 			if runtime.GOOS == "linux" {
-				notif := glib.NotificationNew("FreeMe!GB: Unknown Instruction")
-				notif.SetBody(fmt.Sprintf("UNKNOWN INSTRUCTION:\nINSTRUCTION: 0x%02X\nAt ROM Offset: %s",
-					cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString))
-				notif.SetIcon("ui/freemegb.png")
-				components.AppRef.SendNotification("freemegb-unknown-instruction", notif)
+				conn, err := dbus.SessionBus()
+				if err != nil {
+					panic(err)
+				}
+				iconName := "ioncloud64-freemegb"
+				notif := notify.Notification{
+					AppName:       "FreeMe!GB",
+					ReplacesID:    uint32(0),
+					AppIcon:       iconName,
+					Summary:       "FreeMe!GB: Unknown Instruction",
+					Body:          fmt.Sprintf("UNKNOWN INSTRUCTION:\nINSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+						cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
+					Actions:       []string{"cancel", "Cancel", "open", "Open"}, // tuples of (action_key, label)
+					Hints:         map[string]dbus.Variant{"desktop-entry":dbus.MakeVariant("freemegb")},
+					ExpireTimeout: int32(5000),
+				}
+
+				notify.SendNotification(conn, notif)
 			}
 			break
 		}
