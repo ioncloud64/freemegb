@@ -25,4 +25,4 @@ before_install:
 install:
   - go get github.com/esiqveland/notify
   - go get -u -v -tags gtk_$GTK_VERSION github.com/gotk3/gotk3/gtk
-  - make travisci
+  - make travisci GTK=$GTK_VERSION

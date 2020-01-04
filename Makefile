@@ -30,7 +30,7 @@ linux_amd64:
 	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
 travisci:
-	go get -t -tags gtk_$GTK_VERSION ./...
+	go get -t -tags gtk_$GTK ./...
 	cp -rf ui bin/freemegb-$(version)_$(arch)
 host:
 	go build -v -o bin/freemegb-$(version)_$(arch)/freemegb
