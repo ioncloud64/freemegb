@@ -31,8 +31,6 @@ linux_amd64:
 	cp -rf ui bin/linux_amd64
 travisci:
 	go get -t -tags gtk_3_10 ./...
-	
-
 host:
 	go build -v -o bin/freemegb-$(version)_$(arch)/freemegb
 	cp -rf ui bin/freemegb-$(version)_$(arch)
