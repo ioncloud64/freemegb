@@ -22,7 +22,7 @@ before_install:
   - "export Cairo_VERSION=$(pkg-config --modversion cairo)"
   - "export Pango_VERSION=$(pkg-config --modversion pango)"
 
-install:
+script:
   - go get github.com/esiqveland/notify
   - go get -u -v -tags gtk_$GTK_VERSION github.com/gotk3/gotk3/gtk
   - make travisci
