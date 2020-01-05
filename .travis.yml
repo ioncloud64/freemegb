@@ -4,6 +4,11 @@ go_import_path: github.com/ioncloud64/freemegb
 
 go:
   - 1.13
+deploy:
+  provider: releases
+  skip_cleanup: true
+  github_token: 9ea94b4821621b16589108c885447e9339a43aaf
+  local_dir: build
 
 addons:
   apt:

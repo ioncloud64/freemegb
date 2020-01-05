@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.com/ioncloud64/freemegb.svg?branch=lang%2Fgo)](https://travis-ci.com/ioncloud64/freemegb)
-
+![GitHub issues](https://img.shields.io/github/issues-raw/ioncloud64/freemegb)
+![License](https://img.shields.io/github/license/ioncloud64/freemegb)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/ioncloud64/freemegb)
+![GitHub last commit](https://img.shields.io/github/last-commit/ioncloud64/freemegb)
 # FreeMe!GB
-A GameBoy simulator written in Go. GUI bindings are written in for GTK+. This program is designed to simulate the real hardware that was equipped in the system itself.
+A GameBoy simulator written in Go. GUI bindings are written for GTK+. This program is designed to simulate the real hardware that was equipped in the system itself.
 
 ## Features
 *Note: not all features may be implemented yet*
@@ -9,11 +12,12 @@ A GameBoy simulator written in Go. GUI bindings are written in for GTK+. This pr
   - CPU Registers
   - OPCODE descriptions
   - Breakpoint debugging
-* ROM Detection
-  - ROM Name
-  - ROM Type
-  - Filesize
-  - Compatibility Check
+* Emulation Core
+  - ROM Detection
+    + ROM Name
+    + ROM Type
+    + ROM Size
+    + Compatibility Check
 * Controller Support (Not yet planned)
 * Shader effects (Not yet planned)
 

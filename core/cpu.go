@@ -51,7 +51,6 @@ func (cpu *CPUType) Run(debug bool) {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
 			components.Logger.Printf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
-			// TODO: Add OS Switch for glib notifications in linux
 			if runtime.GOOS == "linux" {
 				conn, err := dbus.SessionBus()
 				if err != nil {
@@ -62,8 +61,8 @@ func (cpu *CPUType) Run(debug bool) {
 					AppName:       "FreeMe!GB",
 					ReplacesID:    uint32(0),
 					AppIcon:       iconName,
-					Summary:       "FreeMe!GB: Unknown Instruction",
-					Body:          fmt.Sprintf("UNKNOWN INSTRUCTION:\nINSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+					Summary:       "Unknown Instruction",
+					Body:          fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
 						cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
 					Actions:       []string{"cancel", "Cancel", "open", "Open"}, // tuples of (action_key, label)
 					Hints:         map[string]dbus.Variant{"desktop-entry":dbus.MakeVariant("freemegb")},
