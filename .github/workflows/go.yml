@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install GTK+ development dependencies
-      run: apt-get install libgtk-3-dev libcairo2-dev libglib2.0-dev
+      run: sudo apt-get install libgtk-3-dev libcairo2-dev libglib2.0-dev
 
     - name: Set up Go 1.13
       uses: actions/setup-go@v1
@@ -31,4 +31,3 @@ jobs:
     - name: Go build
       run:
         go build
-        
