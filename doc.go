@@ -1,6 +1,6 @@
 // Package main is the entry-point to FreeMe!GB
 //
-// By ioncloud64 (Nathan Martin)
+// // By ioncloud64 (Nathan Martin)
 package main
 
 // AppID is the GTK Application ID string
