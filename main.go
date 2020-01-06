@@ -7,7 +7,6 @@ import (
 	"io"
 	"strings"
 	"os"
-	"runtime"
 
 	"github.com/ioncloud64/freemegb/core"
 	"github.com/ioncloud64/freemegb/core/components"
@@ -36,10 +35,6 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 
 // main is the entry point of FreeMe!GB.
 func main() {
-	// TODO: Remove runtime check of GOOS and update debian package working directory
-	if runtime.GOOS == "linux" {
-		os.Chdir("/usr/share/freemegb")
-	}
 	components.Init()
 	var System = core.System
 
@@ -354,8 +349,4 @@ func UIErrorCheck(err error) {
 		// panic for any errors.
 		components.Logger.Panic(err)
 	}
-}
-
-func SetupUI(*gtk.Window) error {
-	return nil
 }
