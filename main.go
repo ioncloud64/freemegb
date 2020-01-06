@@ -1,3 +1,4 @@
+// Package main is the entry point of the application
 package main
 
 import (
@@ -33,7 +34,9 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 	return len(data), err
 }
 
+// main is the entry point of FreeMe!GB.
 func main() {
+	// TODO: Remove runtime check of GOOS and update debian package working directory
 	if runtime.GOOS == "linux" {
 		os.Chdir("/usr/share/freemegb")
 	}
@@ -47,6 +50,7 @@ func main() {
 	UI(&System)
 }
 
+// UI receives the core system and sets up the UI of FreeMe!GB.
 func UI(System *core.SystemType) {
 	app, err := gtk.ApplicationNew(AppID, glib.APPLICATION_FLAGS_NONE)
 	UIErrorCheck(err)
@@ -263,6 +267,7 @@ func UI(System *core.SystemType) {
 	app.Run(os.Args[1:])
 }
 
+// IsWindow converts a GObject to a GTK Window.
 func IsWindow(obj glib.IObject) (*gtk.Window, error) {
 	// Make type assertion (as per gtk.go).
 	if win, ok := obj.(*gtk.Window); ok {
@@ -271,6 +276,7 @@ func IsWindow(obj glib.IObject) (*gtk.Window, error) {
 	return nil, errors.New("not a *gtk.Window")
 }
 
+// IsMenuItem converts a GObject to a GTK MenuItem.
 func IsMenuItem(obj glib.IObject) (*gtk.MenuItem, error) {
 	// Make type assertion (as per gtk.go).
 	if item, ok := obj.(*gtk.MenuItem); ok {
@@ -279,6 +285,7 @@ func IsMenuItem(obj glib.IObject) (*gtk.MenuItem, error) {
 	return nil, errors.New("not a *gtk.MenuItem")
 }
 
+// IsFileChooserDialog converts a GObject to a GTK FileChooserDialog.
 func IsFileChooserDialog(obj glib.IObject) (*gtk.FileChooserDialog, error) {
 	// Make type assertion (as per gtk.go).
 	if dialog, ok := obj.(*gtk.FileChooserDialog); ok {
@@ -287,6 +294,7 @@ func IsFileChooserDialog(obj glib.IObject) (*gtk.FileChooserDialog, error) {
 	return nil, errors.New("not a *gtk.FileChooserDialog")
 }
 
+// IsAboutDialog converts a GObject to a GTK AboutDialog.
 func IsAboutDialog(obj glib.IObject) (*gtk.AboutDialog, error) {
 	// Make type assertion (as per gtk.go).
 	if dialog, ok := obj.(*gtk.AboutDialog); ok {
@@ -295,6 +303,7 @@ func IsAboutDialog(obj glib.IObject) (*gtk.AboutDialog, error) {
 	return nil, errors.New("not a *gtk.AboutDialog")
 }
 
+// IsButton converts a GObject to a GTK Button.
 func IsButton(obj glib.IObject) (*gtk.Button, error) {
 	// Make type assertion (as per gtk.go).
 	if button, ok := obj.(*gtk.Button); ok {
@@ -303,6 +312,7 @@ func IsButton(obj glib.IObject) (*gtk.Button, error) {
 	return nil, errors.New("not a *gtk.Button")
 }
 
+// IsListStore converts a GObject to a GTK ListStore.
 func IsListStore(obj glib.IObject) (*gtk.ListStore, error) {
 	// Make type assertion (as per gtk.go).
 	if item, ok := obj.(*gtk.ListStore); ok {
@@ -311,6 +321,7 @@ func IsListStore(obj glib.IObject) (*gtk.ListStore, error) {
 	return nil, errors.New("not a *gtk.ListStore")
 }
 
+// IsTreeView converts a GObject to a GTK TreeView.
 func IsTreeView(obj glib.IObject) (*gtk.TreeView, error) {
 	// Make type assertion (as per gtk.go).
 	if item, ok := obj.(*gtk.TreeView); ok {
@@ -319,6 +330,7 @@ func IsTreeView(obj glib.IObject) (*gtk.TreeView, error) {
 	return nil, errors.New("not a *gtk.TreeView")
 }
 
+// IsProgressBar converts a GObject to a GTK ProgressBar.
 func IsProgressBar(obj glib.IObject) (*gtk.ProgressBar, error) {
 	// Make type assertion (as per gtk.go).
 	if item, ok := obj.(*gtk.ProgressBar); ok {
@@ -327,6 +339,7 @@ func IsProgressBar(obj glib.IObject) (*gtk.ProgressBar, error) {
 	return nil, errors.New("not a *gtk.ProgressBar")
 }
 
+// IsTextView converts a GObject to a GTK TextView.
 func IsTextView(obj glib.IObject) (*gtk.TextView, error) {
 	// Make type assertion (as per gtk.go).
 	if item, ok := obj.(*gtk.TextView); ok {
@@ -335,6 +348,7 @@ func IsTextView(obj glib.IObject) (*gtk.TextView, error) {
 	return nil, errors.New("not a *gtk.TextView")
 }
 
+// UIErrorCheck checks a previous Is* function for any UI errors.
 func UIErrorCheck(err error) {
 	if err != nil {
 		// panic for any errors.
