@@ -1,3 +1,6 @@
+// Package main is the entry-point to FreeMe!GB
+//
+// // By ioncloud64 (Nathan Martin)
 package main
 
 import (
@@ -14,8 +17,10 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 )
 
+// AppID is the GTK Application ID string
 const AppID = "com.ioncloud64.freemegb"
 
+// UITextView is a wrapper containing a GTK TextView
 type UITextView struct {
 	TextView *gtk.TextView
 }
