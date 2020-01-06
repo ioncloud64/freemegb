@@ -6,7 +6,7 @@ import (
 	"github.com/ioncloud64/freemegb/core/components"
 
 	"time"
-
+	"fmt"
 	"github.com/gotk3/gotk3/gtk"
 )
 
@@ -39,7 +39,11 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 	rom, err := ioutil.ReadFile(location)
 	if err == nil {
 		ROM.data = rom
-		ROM.BuildROMModel()
+		ROM.BuildModel()
+
+		ROM.romName = ROM.GetName()
+		components.Logger.Println("Loaded: " + ROM.romName)
+		fmt.Println("Loaded: " + ROM.romName)
 
 		menuDebug.SetSensitive(false)
 		menuRun.SetSensitive(false)
