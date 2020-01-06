@@ -1,0 +1,7 @@
+github.com/esiqveland/notify v0.1.2 h1:eKtUsFNX56PsX6OTwRkJIyv63r7dtEiTad7cw1Vjg7w=
+github.com/esiqveland/notify v0.1.2/go.mod h1:uwI5wsCXmKMmFlk0bNKIrc5T+ZUz/RU64/0x0bvkRac=
+github.com/godbus/dbus v5.0.1+incompatible h1:fsDsnr/6MFSIm3kl6JJpq5pH+vO/rA5jUunalLnzSc8=
+github.com/godbus/dbus v5.0.1+incompatible/go.mod h1:/YcGZj5zSblfDWMMoOzV4fas9FZnQYTkDnsGvmh2Grw=
+github.com/godbus/dbus/v5 v5.0.3/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
+github.com/gotk3/gotk3 v0.0.0-20200103101635-d3629b451bb5 h1:FEketUKKSYVEM7KBQmhXmZCRu2udwsRuiy8uoyN9gUE=
+github.com/gotk3/gotk3 v0.0.0-20200103101635-d3629b451bb5/go.mod h1:Eew3QBwAOBTrfFFDmsDE5wZWbcagBL1NUslj1GhRveo=
