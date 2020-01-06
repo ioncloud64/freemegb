@@ -11,7 +11,6 @@ type FlagsType struct {
 	CARRY      byte
 }
 
-// TODO: Finish Flags Structure and functions
 type RegistersType struct {
 	AF    uint16
 	BC    uint16
