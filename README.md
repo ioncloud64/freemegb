@@ -10,18 +10,24 @@
 A GameBoy simulator written in Go. GUI bindings are written for GTK+. This program is designed to simulate the real hardware that was equipped in the system itself.
 
 ## Features
-*Note: not all features may be implemented yet*
+*Note: Features yet implemented are italicized*
 * Debugging Utility
   - CPU Registers
   - OPCODE descriptions
-  - Breakpoint debugging
+  - *Breakpoint debugging*
 * Emulation Core
-  - ROM Detection
-    + ROM Name
-    + ROM Type
-    + ROM Size
-    + Compatibility Check
-* Controller Support (Not yet planned)
+  - *ROMs*
+    + *ROM Name*
+    + *ROM Type*
+    + *ROM Size*
+    + *Compatibility Check*
+  - CPU
+    + Decode ROM file into OPCODE map
+    + Registers per hardware specifications
+    + Interrupts per specifications
+    + *Throttle speed per hardware specifications*
+  - *GPU*
+* *Controller Support*
 * Shader effects (Not yet planned)
 
 ## Build Requirements
