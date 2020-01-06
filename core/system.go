@@ -45,6 +45,18 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 		components.Logger.Println("Loaded: " + ROM.romName)
 		fmt.Println("Loaded: " + ROM.romName)
 
+		ROM.romType = ROM.GetType()
+		components.Logger.Println("ROM TYPE: " + ROM.romType)
+		fmt.Println("ROM TYPE: " + ROM.romType)
+
+		ROM.romSize = ROM.GetROMSize()
+		components.Logger.Println("ROM SIZE: " + fmt.Sprintf("%dKB", ROM.romSize))
+		fmt.Println("ROM SIZE: " + fmt.Sprintf("%dKB", ROM.romSize))
+
+		ROM.romRAMSize = ROM.GetRAMSize()
+		components.Logger.Println("ROM RAM SIZE: " + fmt.Sprintf("%dKB", ROM.romRAMSize))
+		fmt.Println("ROM RAM SIZE: " + fmt.Sprintf("%dKB", ROM.romRAMSize))
+
 		menuDebug.SetSensitive(false)
 		menuRun.SetSensitive(false)
 		romTreeView.SetModel(nil)

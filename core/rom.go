@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"math"
 )
 
 // ROM_OFFSET_NAME is the location in every ROM of the name
@@ -45,8 +46,32 @@ type ROMType struct {
 	modelColumns	[]string
 	romType				string
 	romName				string
+	romSize				int
+	romRAMSize		int
 }
 
+// GetType gets the ROM Type of the ROM from within the ROM's file
+func (rom *ROMType) GetType () string {
+	return romTypeMap[rom.data[ROM_OFFSET_TYPE]]
+}
+
+// GetROMSize get the size of the ROM from within the ROM's file
+func (rom *ROMType) GetROMSize () int {
+	var romSize int = int(rom.data[ROM_OFFSET_ROM_SIZE])
+	if (romSize & 0xF0) == 0x50 {
+		romSize = int(math.Pow(2.0, float64((((0x52) & 0xF) + 1)) + 64))
+	} else {
+		romSize = int(math.Pow(2.0, float64((romSize + 1))))
+	}
+	return romSize
+}
+
+// GetRAMSize get the size of the ROM's RAM from within the ROM's file
+func (rom *ROMType) GetRAMSize () int {
+	return int(math.Pow(4.0, float64(rom.data[ROM_OFFSET_RAM_SIZE])))
+}
+
+// GetName gets the name of the ROM from within the ROM's file
 func (rom *ROMType) GetName () string {
 	var name [256]byte
 	var returnString string
@@ -61,6 +86,7 @@ func (rom *ROMType) GetName () string {
 	return returnString
 }
 
+// BuildModel builds a GTK TreeModel using an instruction map
 func (rom *ROMType) BuildModel () {
 	model := []interface{}{}
 
@@ -94,4 +120,6 @@ var ROM = ROMType {
 	modelColumns:	[]string{"Offset", "Instruction"},
 	romType:		"",
 	romName:		"",
+	romSize:		0,
+	romRAMSize:	0,
 }
