@@ -1,3 +1,3 @@
 *.go -text diff=golang
-*.glade -text diff=xml
-*.manifest -text diff=xml
+*.glade -text diff=XML
+*.manifest -text diff=XML
