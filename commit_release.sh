@@ -1,4 +1,4 @@
 #!/bin/bash
-$version=$(< VERSION)
-git commit -S -m "$1"
-git tag -a "${version}" -m "$1"
+version=v$(< VERSION)
+git commit -S -m $version
+git tag -a $version -m $version
