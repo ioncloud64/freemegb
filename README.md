@@ -3,6 +3,9 @@
 ![License](https://img.shields.io/github/license/ioncloud64/freemegb)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/ioncloud64/freemegb)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ioncloud64/freemegb)
+
+[![GoDoc](https://godoc.org/github.com/ioncloud64/freemegb?status.svg)](https://godoc.org/github.com/ioncloud64/freemegb)
+
 # FreeMe!GB
 A GameBoy simulator written in Go. GUI bindings are written for GTK+. This program is designed to simulate the real hardware that was equipped in the system itself.
 
