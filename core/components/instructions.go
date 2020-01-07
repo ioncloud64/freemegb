@@ -558,11 +558,11 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0x3B - UNKNOWN
+	// 0x3B - DEC SP
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.SP-- },
 		Opcode:      0x3B,
-		Name:        "UNKNOWN",
+		Name:        "DEC SP",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
@@ -585,12 +585,12 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0x3E - UNKNOWN
+	// 0x3E - LOAD A N
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.PC++; REGISTERS.SetA(ROMref[REGISTERS.PC]) },
 		Opcode:      0x3E,
-		Name:        "UNKNOWN",
-		NumOperands: 0,
+		Name:        "LOAD A N",
+		NumOperands: 1,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
@@ -2150,9 +2150,9 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xEA - UNKNOWN
+	// 0xEA - LOAD NNP A
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() {  },
 		Opcode:      0xEA,
 		Name:        "UNKNOWN",
 		NumOperands: 0,

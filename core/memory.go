@@ -19,7 +19,7 @@ const OFFSEToam uint16 = 0xFE00
 const OFFSEThRAM uint16 = 0xFF80
 const OFFSETio uint16 = 0xFF00
 
-func readByte(address uint16) byte {
+func ReadByte(address uint16) byte {
 	if address <= 0x7FFF {
 		return ROM.data[address]
 	} else if address >= 0xA000 && address <= 0xBFFF {
@@ -56,7 +56,7 @@ func readByte(address uint16) byte {
 	return 0
 }
 
-func writeByte(address uint16, value byte) {
+func WriteByte(address uint16, value byte) {
 
 	if address <= 0x7FFF {
 		ROM.data[address] = value
