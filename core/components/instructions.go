@@ -1194,7 +1194,7 @@ var INSTRUCTIONS = []InstructionType{
 	// 0x80 - ADD A B
 	{
 		Exec: func() {
-			REGISTERS.SetA(REGISTERS.Add8(REGISTERS.A(), REGISTERS.B()))
+			REGISTERS.SetA(REGISTERS.ADD8(REGISTERS.A(), REGISTERS.B()))
 		},
 		Opcode:      0x80,
 		Name:        "ADD A B",
@@ -1616,38 +1616,38 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xAF - UNKNOWN
+	// 0xAF - XOR A
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.XOR(REGISTERS.A()) },
 		Opcode:      0xAF,
-		Name:        "UNKNOWN",
+		Name:        "XOR A",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xB0 - UNKNOWN
+	// 0xB0 - XOR B
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.XOR(REGISTERS.B()) },
 		Opcode:      0xB0,
-		Name:        "UNKNOWN",
+		Name:        "XOR B",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xB1 - UNKNOWN
+	// 0xB1 - XOR C
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.XOR(REGISTERS.C()) },
 		Opcode:      0xB1,
-		Name:        "UNKNOWN",
+		Name:        "XOR C",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xB2 - UNKNOWN
+	// 0xB2 - XOR D
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { REGISTERS.XOR(REGISTERS.D()) },
 		Opcode:      0xB2,
-		Name:        "UNKNOWN",
+		Name:        "XOR D",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,

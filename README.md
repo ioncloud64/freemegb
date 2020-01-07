@@ -16,10 +16,10 @@ A GameBoy simulator written in Go. GUI bindings are written for GTK+. This progr
   - OPCODE descriptions
   - *Breakpoint debugging*
 * Emulation Core
-  - *ROMs*
-    + *ROM Name*
-    + *ROM Type*
-    + *ROM Size*
+  - ROMs
+    + ROM Name
+    + ROM Type
+    + ROM Size
     + *Compatibility Check*
   - CPU
     + Decode ROM file into OPCODE map

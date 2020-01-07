@@ -125,16 +125,16 @@ func (r *RegistersType) CombineTo16(lower byte, upper byte) uint16 {
 	return uint16(uint16(lower)<<8 | uint16(upper))
 }
 
-func (r *RegistersType) Add8(destination byte, source byte) byte {
-	result := destination + source
+func (r *RegistersType) ADD8(destination byte, source byte) byte {
+	var result uint16 = uint16(destination) + uint16(source)
 
-	if result&0xFF != 0 {
+	if result&0xFF00 != 0 {
 		r.FLAG_SET(r.FLAGS.CARRY)
 	} else {
 		r.FLAG_CLEAR(r.FLAGS.CARRY)
 	}
 
-	destination = result & 0xFF
+	destination = byte(result & 0xFF)
 
 	if destination != 0 {
 		r.FLAG_CLEAR(r.FLAGS.ZERO)
@@ -150,11 +150,175 @@ func (r *RegistersType) Add8(destination byte, source byte) byte {
 
 	r.FLAG_CLEAR(r.FLAGS.SUBTRACT)
 
-	return result
+	return byte(destination)
 }
 
-func (r *RegistersType) Add16(destination uint16, source uint16) {
+func (r *RegistersType) ADD16(destination uint16, source uint16) uint16 {
 	// destination + source
+	var result uint32 = uint32(destination) + uint32(source)
+
+	if result&0xFFFF0000 != 0 {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	destination = uint16(result & 0xFFFF)
+
+	if ((destination & 0x0F) + (source & 0x0F)) > 0x0F {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	r.FLAG_CLEAR(r.FLAGS.SUBTRACT)
+
+	return uint16(destination)
+}
+
+func (r *RegistersType) ADDC (value byte)  {
+	if r.FLAG_ISSET(r.FLAGS.CARRY) {
+		value += 1
+	}
+
+	var result uint16 = uint16(r.A()) + uint16(value)
+
+	if (result & 0xFF00)&1 != 0 {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	if value == r.A() {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	}
+
+	if (value & 0x0F) + (r.A() & 0x0F) > 0x0F {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	r.FLAG_SET(r.FLAGS.SUBTRACT)
+
+	r.SetA(byte(result & 0xFF))
+}
+
+func (r *RegistersType) SUBC(value byte) {
+	if r.FLAG_ISSET(r.FLAGS.CARRY) {
+		value += 1
+	}
+
+	r.FLAG_SET(r.FLAGS.SUBTRACT)
+
+	if value > r.A() {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	if value == r.A() {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	}
+
+	if value > r.A() {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	if (value & 0x0F) > (r.A() & 0x0F) {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	r.SetA(r.A() - value)
+}
+
+func (r *RegistersType) SUB(value byte) {
+	r.FLAG_SET(r.FLAGS.SUBTRACT)
+
+	if value > r.A() {
+		r.FLAG_SET(r.FLAGS.CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.CARRY)
+	}
+
+	if (value & 0x0F) > (r.A() & 0x0F) {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	r.SetA(r.A()-value)
+
+	if r.A()&1 != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+}
+
+func (r *RegistersType) AND(value byte) {
+	r.SetA(r.A()&value)
+
+	if r.A()&1 != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+
+	r.FLAG_CLEAR(r.FLAGS.CARRY | r.FLAGS.SUBTRACT)
+	r.FLAG_SET(r.FLAGS.HALF_CARRY)
+}
+
+func (r *RegistersType) OR(value byte)  {
+	r.SetA(r.A()|value)
+
+	if r.A()&1 != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+
+	r.FLAG_CLEAR(r.FLAGS.CARRY | r.FLAGS.SUBTRACT | r.FLAGS.HALF_CARRY)
+}
+
+func (r *RegistersType) XOR(value byte)  {
+	r.SetA(r.A()^value)
+
+	if r.A()&1 != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+
+	r.FLAG_CLEAR(r.FLAGS.CARRY | r.FLAGS.SUBTRACT | r.FLAGS.HALF_CARRY)
+}
+
+func (r *RegistersType) INC(value byte) byte {
+	if (value & 0x0F) == 0x0F {
+		r.FLAG_SET(r.FLAGS.HALF_CARRY)
+	} else {
+		r.FLAG_CLEAR(r.FLAGS.HALF_CARRY)
+	}
+
+	value++
+
+	if value&1 != 0 {
+		r.FLAG_CLEAR(r.FLAGS.ZERO)
+	} else {
+		r.FLAG_SET(r.FLAGS.ZERO)
+	}
+
+	r.FLAG_SET(r.FLAGS.SUBTRACT)
+
+	return value
 }
 
 func (r *RegistersType) FLAG_SET(flag byte) {
