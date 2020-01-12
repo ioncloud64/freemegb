@@ -5,9 +5,9 @@ import (
 
 	"github.com/ioncloud64/freemegb/core/components"
 
-	"time"
 	"fmt"
 	"github.com/gotk3/gotk3/gtk"
+	"time"
 )
 
 /*
@@ -22,13 +22,13 @@ import (
 	---> Screen Pipeline
 */
 type SystemType struct {
-	CPU CPUType
-	ROM ROMType
+	CPU *CPUType
+	ROM *ROMType
 }
 
 var System = SystemType{
-	CPU: CPU,
-	ROM: ROM,
+	CPU: &CPU,
+	ROM: &ROM,
 }
 
 func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,

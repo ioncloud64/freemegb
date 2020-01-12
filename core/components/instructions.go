@@ -2152,7 +2152,7 @@ var INSTRUCTIONS = []InstructionType{
 	},
 	// 0xEA - LOAD NNP A
 	{
-		Exec:        func() {  },
+		Exec:        func() {},
 		Opcode:      0xEA,
 		Name:        "UNKNOWN",
 		NumOperands: 0,
