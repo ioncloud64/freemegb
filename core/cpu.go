@@ -18,21 +18,21 @@ type INTERRUPTSType struct {
 	flags  byte
 }
 
-// INTERRUPTS is the exported object used in the system
-// INTERRUPTS is exported for value setting in other files
+// INTERRUPTS is the exported object used in the system <br>
+// INTERRUPTS is exported for value setting in other files <br>
 var INTERRUPTS INTERRUPTSType = INTERRUPTSType{
 	master: 0x00,
 	enable: 0x00,
 	flags:  0x00,
 }
 
-// CPUType is the structure to define what's inside a CPU
-// CPU Structure
-// ================
+// CPUType is the structure to define what's inside a CPU <br>
+//  CPU Structure
+//  ================
 //  ---> Instructions Array
 //  ---> Registers Structure
-//  ---? DEBUG boolean value set with CPU.Run()
-// ================
+//  ---> DEBUG boolean value set with CPU.Run()
+//  ================
 type CPUType struct {
 	INSTRUCTIONS []components.InstructionType
 	REGISTERS    *components.RegistersType
