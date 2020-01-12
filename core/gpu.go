@@ -2,7 +2,7 @@ package core
 
 import ()
 
-// GPUType is the structure to define what's inside a GPU <br>
+// GPUType is the structure to define what's inside a GPU
 //  GPU Structure
 //  ================
 //  ================
@@ -14,7 +14,8 @@ type GPUType struct {
 	tick     byte
 }
 
-// GPU is the exported object used in the system <br>
+// GPU is the exported object used in the system
+//
 // GPU is exported to become a shared variable in the System object
 var GPU = GPUType{
 	control:  0x00,

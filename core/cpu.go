@@ -18,15 +18,16 @@ type INTERRUPTSType struct {
 	flags  byte
 }
 
-// INTERRUPTS is the exported object used in the system <br>
-// INTERRUPTS is exported for value setting in other files <br>
+// INTERRUPTS is the exported object used in the system
+//
+// INTERRUPTS is exported for value setting in other files
 var INTERRUPTS INTERRUPTSType = INTERRUPTSType{
 	master: 0x00,
 	enable: 0x00,
 	flags:  0x00,
 }
 
-// CPUType is the structure to define what's inside a CPU <br>
+// CPUType is the structure to define what's inside a CPU
 //  CPU Structure
 //  ================
 //  ---> Instructions Array
