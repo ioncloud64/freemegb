@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// InstructionType is the structure that holds the execution function,
+// opcode value, the name, number of operands, operand locations, and CPU cycles
 type InstructionType struct {
 	Exec        func() // executed code
 	Opcode      uint8  // opcode
@@ -14,6 +16,7 @@ type InstructionType struct {
 
 }
 
+// INSTRUCTIONS is the array holding InstructionType elements to build a ROM execution table
 var INSTRUCTIONS = []InstructionType{
 	// 0x00 - NOP
 	{
@@ -2154,6 +2157,7 @@ var INSTRUCTIONS = []InstructionType{
 	{
 		Exec: func() {
 			MMU.WriteByte(REGISTERS.CombineTo16(ROMref[REGISTERS.PC+2], ROMref[REGISTERS.PC+1]), REGISTERS.A())
+			REGISTERS.PC += 2
 		},
 		Opcode:      0xEA,
 		Name:        "LOAD NNP A",
