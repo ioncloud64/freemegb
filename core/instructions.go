@@ -1,4 +1,4 @@
-package components
+package core
 
 import (
 	"fmt"
@@ -2152,10 +2152,12 @@ var INSTRUCTIONS = []InstructionType{
 	},
 	// 0xEA - LOAD NNP A
 	{
-		Exec:        func() {},
+		Exec: func() {
+			MMU.WriteByte(REGISTERS.CombineTo16(ROMref[REGISTERS.PC+2], ROMref[REGISTERS.PC+1]), REGISTERS.A())
+		},
 		Opcode:      0xEA,
-		Name:        "UNKNOWN",
-		NumOperands: 0,
+		Name:        "LOAD NNP A",
+		NumOperands: 2,
 		Operands:    []byte{},
 		Cycles:      4,
 	},

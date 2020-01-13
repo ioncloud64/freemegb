@@ -8,7 +8,6 @@ import (
 	// "github.com/gotk3/gotk3/glib"
 	"github.com/esiqveland/notify"
 	"github.com/godbus/dbus"
-	"github.com/ioncloud64/freemegb/core/components"
 )
 
 // INTERRUPTSType is the structure to define constant values used to identify an interrupt
@@ -35,16 +34,16 @@ var INTERRUPTS INTERRUPTSType = INTERRUPTSType{
 //  ---> DEBUG boolean value set with CPU.Run()
 //  ================
 type CPUType struct {
-	INSTRUCTIONS []components.InstructionType
-	REGISTERS    *components.RegistersType
+	INSTRUCTIONS []InstructionType
+	REGISTERS    *RegistersType
 	DEBUG        bool
 }
 
 // CPU is the exported object used in the system
 // CPU is exported to become a shared variable in the System object
 var CPU = CPUType{
-	INSTRUCTIONS: components.INSTRUCTIONS,
-	REGISTERS:    &components.REGISTERS,
+	INSTRUCTIONS: INSTRUCTIONS,
+	REGISTERS:    &REGISTERS,
 	DEBUG:        false,
 }
 
@@ -54,7 +53,7 @@ func (cpu *CPUType) Run(debug bool) {
 	for {
 		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
-			components.Logger.Printf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
+			Logger.Printf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
 			if runtime.GOOS == "linux" {
 				conn, err := dbus.SessionBus()
@@ -78,7 +77,7 @@ func (cpu *CPUType) Run(debug bool) {
 			}
 			break
 		}
-		components.Logger.Println("CPU Step")
+		Logger.Println("CPU Step")
 		if cpu.DEBUG {
 			cpu.REGISTERS.Print()
 			time.Sleep(1 * time.Second)

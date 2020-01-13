@@ -11,7 +11,6 @@ import (
 	"os"
 
 	"github.com/ioncloud64/freemegb/core"
-	"github.com/ioncloud64/freemegb/core/components"
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -39,12 +38,12 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 
 // main is the entry point of FreeMe!GB.
 func main() {
-	components.Init()
+	core.Init()
 	var System = core.System
 
-	fmt.Println(components.LogFilename)
+	fmt.Println(core.LogFilename)
 
-	defer components.LogFile.Close()
+	defer core.LogFile.Close()
 
 	UI(&System)
 }
@@ -54,13 +53,13 @@ func UI(System *core.SystemType) {
 	app, err := gtk.ApplicationNew(AppID, glib.APPLICATION_FLAGS_NONE)
 	UIErrorCheck(err)
 
-	components.AppRef = app
+	core.AppRef = app
 
 	app.Connect("startup", func() {
-		components.Logger.Println("FreeMe!GB is starting up...")
+		core.Logger.Println("FreeMe!GB is starting up...")
 	})
 	app.Connect("activate", func() {
-		components.Logger.Println("FreeMe!GB is activated...")
+		core.Logger.Println("FreeMe!GB is activated...")
 
 		builder, err := gtk.BuilderNewFromFile("ui/MainWindow.glade")
 		UIErrorCheck(err)
@@ -104,9 +103,9 @@ func UI(System *core.SystemType) {
 			TextView: console,
 		}
 
-		multiWriter := io.MultiWriter(components.Logger.Writer(), &consoleUI)
+		multiWriter := io.MultiWriter(core.Logger.Writer(), &consoleUI)
 
-		components.Logger.SetOutput(multiWriter)
+		core.Logger.SetOutput(multiWriter)
 		// Run MenuItem
 		menuRunObj, err := builder.GetObject("menuRun")
 		UIErrorCheck(err)
@@ -218,12 +217,12 @@ func UI(System *core.SystemType) {
 			var result = romFileChooserDialog.Run()
 			if result == gtk.RESPONSE_ACCEPT {
 				ROMfile := romFileChooserDialog.GetFilename()
-				components.Logger.Println(ROMfile)
+				core.Logger.Println(ROMfile)
 				romFileChooserDialog.Close()
 				// Do not block UI execution
 				go System.LoadROM(string(ROMfile), romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 			} else if result == gtk.RESPONSE_CANCEL {
-				components.Logger.Println("Cancelling")
+				core.Logger.Println("Cancelling")
 				romFileChooserDialog.Close()
 			}
 
@@ -260,7 +259,7 @@ func UI(System *core.SystemType) {
 		app.AddWindow(win)
 	})
 	app.Connect("shutdown", func() {
-		components.Logger.Println("FreeMe!GB is shutting down...")
+		core.Logger.Println("FreeMe!GB is shutting down...")
 	})
 
 	app.Run(os.Args[1:])
@@ -351,6 +350,6 @@ func IsTextView(obj glib.IObject) (*gtk.TextView, error) {
 func UIErrorCheck(err error) {
 	if err != nil {
 		// panic for any errors.
-		components.Logger.Panic(err)
+		core.Logger.Panic(err)
 	}
 }

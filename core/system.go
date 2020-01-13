@@ -3,8 +3,6 @@ package core
 import (
 	"io/ioutil"
 
-	"github.com/ioncloud64/freemegb/core/components"
-
 	"fmt"
 	"github.com/gotk3/gotk3/gtk"
 	"time"
@@ -34,7 +32,7 @@ var System = SystemType{
 func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 	romTreeView *gtk.TreeView, romProgressBar *gtk.ProgressBar,
 	menuDebug *gtk.MenuItem, menuRun *gtk.MenuItem) {
-	components.Logger.Println("ROM: Loading")
+	Logger.Println("ROM: Loading")
 	before := time.Now()
 	rom, err := ioutil.ReadFile(location)
 	if err == nil {
@@ -42,19 +40,19 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 		ROM.BuildModel()
 
 		ROM.romName = ROM.GetName()
-		components.Logger.Println("Loaded: " + ROM.romName)
+		Logger.Println("Loaded: " + ROM.romName)
 		fmt.Println("Loaded: " + ROM.romName)
 
 		ROM.romType = ROM.GetType()
-		components.Logger.Println("ROM TYPE: " + ROM.romType)
+		Logger.Println("ROM TYPE: " + ROM.romType)
 		fmt.Println("ROM TYPE: " + ROM.romType)
 
 		ROM.romSize = ROM.GetROMSize()
-		components.Logger.Println("ROM SIZE: " + fmt.Sprintf("%dKB", ROM.romSize))
+		Logger.Println("ROM SIZE: " + fmt.Sprintf("%dKB", ROM.romSize))
 		fmt.Println("ROM SIZE: " + fmt.Sprintf("%dKB", ROM.romSize))
 
 		ROM.romRAMSize = ROM.GetRAMSize()
-		components.Logger.Println("ROM RAM SIZE: " + fmt.Sprintf("%dKB", ROM.romRAMSize))
+		Logger.Println("ROM RAM SIZE: " + fmt.Sprintf("%dKB", ROM.romRAMSize))
 		fmt.Println("ROM RAM SIZE: " + fmt.Sprintf("%dKB", ROM.romRAMSize))
 
 		menuDebug.SetSensitive(false)
@@ -70,26 +68,26 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 				[]int{0, 1},
 				[]interface{}{row[0], row[1]})
 			if err != nil {
-				components.Logger.Println(err)
+				Logger.Println(err)
 			}
 			if i%percentStep == 0 {
 				romProgressBar.SetFraction(float64(i) / float64(romModelLength))
-				// components.Logger.Println(romProgressBar.GetFraction())
+				// Logger.Println(romProgressBar.GetFraction())
 				// romProgressBar.Pulse()
 			} else if i == romModelLength-1 {
 				romProgressBar.SetFraction(1)
 			}
 		}
 		romTreeView.SetModel(romListStore)
-		components.ROMref = ROM.data
+		ROMref = ROM.data
 	} else {
-		components.Logger.Println("ROM: Error loading")
+		Logger.Println("ROM: Error loading")
 		after := time.Now()
-		components.Logger.Println(after.Sub(before))
+		Logger.Println(after.Sub(before))
 		return
 	}
 	after := time.Now()
-	components.Logger.Println("ROM: Loaded in", after.Sub(before))
+	Logger.Println("ROM: Loaded in", after.Sub(before))
 	menuDebug.SetSensitive(true)
 	menuRun.SetSensitive(true)
 	return
