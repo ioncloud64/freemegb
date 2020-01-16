@@ -7,11 +7,12 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"strings"
 	"os"
+	"strings"
 
 	"github.com/ioncloud64/freemegb/core"
 
+	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 )
@@ -82,7 +83,38 @@ func UI(System *core.SystemType) {
 		UIErrorCheck(err)
 
 		debugStart.Connect("activate", func() {
+			b, err := gtk.BuilderNewFromFile("ui/EmulatorWindow.glade")
+			UIErrorCheck(err)
+
+			obj, err := b.GetObject("EmulatorWindow")
+			UIErrorCheck(err)
+
+			emulatorWindow, err := IsWindow(obj)
+			UIErrorCheck(err)
+
+			gtkglarea, err := b.GetObject("GLArea")
+			UIErrorCheck(err)
+
+			glarea, err := IsGLArea(gtkglarea)
+			UIErrorCheck(err)
+
+			glarea.SetRequiredVersion(4, 6)
+
 			go System.CPU.Run(true)
+
+			emulatorWindow.Show()
+
+			glarea.MakeCurrent()
+
+			// init GL
+			if err := gl.Init(); err != nil {
+				panic(err)
+			}
+			version := gl.GoStr(gl.GetString(gl.VERSION))
+			fmt.Println("OpenGL version", version)
+			major, minor := glarea.GetRequiredVersion()
+			fmt.Println("MajorV", major, "MinorV", minor)
+
 		})
 
 		// Debug MenuItem
@@ -344,6 +376,15 @@ func IsTextView(obj glib.IObject) (*gtk.TextView, error) {
 		return item, nil
 	}
 	return nil, errors.New("not a *gtk.TextView")
+}
+
+// IsGLArea converts a GObject to a GTK GLArea.
+func IsGLArea(obj glib.IObject) (*gtk.GLArea, error) {
+	// Make type assertion (as per gtk.go).
+	if item, ok := obj.(*gtk.GLArea); ok {
+		return item, nil
+	}
+	return nil, errors.New("not a *gtk.GLArea")
 }
 
 // UIErrorCheck checks a previous Is* function for any UI errors.
