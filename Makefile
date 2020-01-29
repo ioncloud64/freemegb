@@ -34,6 +34,7 @@ travisci:
 host:
 	go build -v -o bin/freemegb-$(version)_$(arch)/freemegb
 	cp -rf ui bin/freemegb-$(version)_$(arch)
+	cp -rf shaders bin/freemegb-$(version)_$(arch)
 host_deb:
 	mkdir -p build/freemegb-$(version)_$(arch)
 	cp -rf installer_files/$(os)_$(arch)/* build/freemegb-$(version)_$(arch)
@@ -41,6 +42,7 @@ host_deb:
 	cp bin/freemegb-$(version)_$(arch)/freemegb build/freemegb-$(version)_$(arch)/usr/bin/
 	mkdir -p build/freemegb-$(version)_$(arch)/usr/share/freemegb
 	cp -rf ui build/freemegb-$(version)_$(arch)/usr/share/freemegb
+	cp -rf shaders build/freemegb-$(version)_$(arch)/usr/share/freemegb
 	sudo chown -R root:root build/freemegb-$(version)_$(arch)/
 	mkdir dist
 	dpkg -b build/freemegb-$(version)_$(arch)

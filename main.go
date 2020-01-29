@@ -8,11 +8,12 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	// "runtime"
 	"strings"
 
 	"github.com/ioncloud64/freemegb/core"
 
-	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 )
@@ -27,14 +28,21 @@ type UITextView struct {
 
 func (TV *UITextView) Write(data []byte) (n int, err error) {
 	// TODO: Implement proper TextView Console
-	// buff, err := TV.TextView.GetBuffer()
-	// text, err := buff.GetText(buff.GetStartIter(),
-	// 	buff.GetEndIter(), true)
-	// buff.SetText(text + string(data))
-	// TV.TextView.ScrollToIter(buff.GetEndIter(), 0.0, true, 0.5, 0.5)
-	// var mark = buff.CreateMark("end", buff.GetEndIter(), false)
-	// TV.TextView.ScrollToMark(mark, 0.0, false, 0.5, 0.5)
-	return len(data), err
+	glib.IdleAdd(func() {
+		buff, err := TV.TextView.GetBuffer()
+		if err != nil {
+			fmt.Println(err)
+		}
+		text, err := buff.GetText(buff.GetStartIter(),
+			buff.GetEndIter(), true)
+		fmt.Println("Buffer Text:", text)
+		buff.SetText(text + string(data))
+		TV.TextView.ScrollToIter(buff.GetEndIter(), 0.0, true, 0.5, 0.5)
+		var mark = buff.CreateMark("end", buff.GetEndIter(), false)
+		TV.TextView.ScrollToMark(mark, 0.0, false, 0.5, 0.5)
+	})
+
+	return len(data), nil
 }
 
 // main is the entry point of FreeMe!GB.
@@ -102,19 +110,11 @@ func UI(System *core.SystemType) {
 
 			go System.CPU.Run(true)
 
+			glarea.Connect("realize", System.GPU.Init, glarea)
+			glarea.Connect("render", System.GPU.Run, glarea)
+			glarea.Connect("unrealize", System.GPU.Destroy, glarea)
+
 			emulatorWindow.Show()
-
-			glarea.MakeCurrent()
-
-			// init GL
-			if err := gl.Init(); err != nil {
-				panic(err)
-			}
-			version := gl.GoStr(gl.GetString(gl.VERSION))
-			fmt.Println("OpenGL version", version)
-			major, minor := glarea.GetRequiredVersion()
-			fmt.Println("MajorV", major, "MinorV", minor)
-
 		})
 
 		// Debug MenuItem

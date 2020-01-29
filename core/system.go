@@ -4,8 +4,9 @@ import (
 	"io/ioutil"
 
 	"fmt"
-	"github.com/gotk3/gotk3/gtk"
 	"time"
+
+	"github.com/gotk3/gotk3/gtk"
 )
 
 // SystemType is the object definition type
@@ -20,11 +21,13 @@ import (
 //   ---> Screen Pipeline
 type SystemType struct {
 	CPU *CPUType
+	GPU *GPUType
 	ROM *ROMType
 }
 
 var System = SystemType{
 	CPU: &CPU,
+	GPU: &GPU,
 	ROM: &ROM,
 }
 
