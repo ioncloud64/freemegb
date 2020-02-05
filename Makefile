@@ -21,7 +21,7 @@ ifeq ($(arch),arm)
 endif
 	cp -rf ui bin
 linux_arm:
-	GOOS=linux GOARCH=arm go build -v -o bin/linux_arm/freemegb
+	GOOS=linux GOARCH=arm PKG_CONFIG_PATH=/usr/arm-linux-gnueabi/lib/pkgconfig CGO_ENABLED=1 CC=arm-linux-gnueabi-gcc-8 go build -v -o bin/linux_arm/freemegb 
 	cp -rf ui bin/linux_arm
 linux_i386:
 	GOOS=linux GOARCH=386 go build -v -o bin/linux_i386/freemegb

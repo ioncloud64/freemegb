@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"runtime"
 	"time"
+
 	// "log"
 	// "github.com/gotk3/gotk3/glib"
 	"github.com/esiqveland/notify"
 	"github.com/godbus/dbus"
+	"gopkg.in/toast.v1"
 )
 
 // INTERRUPTSType is the structure to define constant values used to identify an interrupt
@@ -74,6 +76,20 @@ func (cpu *CPUType) Run(debug bool) {
 				}
 
 				notify.SendNotification(conn, notif)
+			} else if runtime.GOOS == "windows" {
+				notification := &toast.Notification{
+					AppID:               "com.ioncloud64.freemegb",
+					Title:               "FreeMe!GB",
+					Message:             "Hello!",
+					Icon:                "ui/freemegb.ico",
+					Actions:             []toast.Action{},
+					ActivationType:      "",
+					ActivationArguments: "",
+					Audio:               "default",
+					Loop:                false,
+					Duration:            "short",
+				}
+				notification.Push()
 			}
 			break
 		}

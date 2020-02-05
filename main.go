@@ -9,7 +9,7 @@ import (
 	"io"
 	"os"
 
-	// "runtime"
+	"runtime"
 	"strings"
 
 	"github.com/ioncloud64/freemegb/core"
@@ -27,21 +27,14 @@ type UITextView struct {
 }
 
 func (TV *UITextView) Write(data []byte) (n int, err error) {
-	// TODO: Implement proper TextView Console
-	glib.IdleAdd(func() {
+	glib.IdleAdd(func(textAdded string) {
 		buff, err := TV.TextView.GetBuffer()
 		if err != nil {
 			fmt.Println(err)
 		}
-		text, err := buff.GetText(buff.GetStartIter(),
-			buff.GetEndIter(), true)
-		fmt.Println("Buffer Text:", text)
-		buff.SetText(text + string(data))
-		TV.TextView.ScrollToIter(buff.GetEndIter(), 0.0, true, 0.5, 0.5)
-		var mark = buff.CreateMark("end", buff.GetEndIter(), false)
-		TV.TextView.ScrollToMark(mark, 0.0, false, 0.5, 0.5)
-	})
-
+		buff.Insert(buff.GetEndIter(), textAdded)
+		TV.TextView.ScrollToMark(buff.GetInsert(), 0.0, false, 0.0, 0.0)
+	}, string(data))
 	return len(data), nil
 }
 
@@ -270,6 +263,9 @@ func UI(System *core.SystemType) {
 			// This gets a uri, i.e. with url escape characters for spaces and special characters
 			// strings.ReplaceAll() is required for this operation
 			var romLoc string = strings.ReplaceAll(recentROMs.GetCurrentUri()[7:], "%20", " ")
+			if runtime.GOOS == "windows" {
+				romLoc = romLoc[1:]
+			}
 			fmt.Println(romLoc)
 			go System.LoadROM(romLoc, romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 		})
