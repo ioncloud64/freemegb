@@ -113,7 +113,7 @@ func (r *RegistersType) L() byte {
 
 // Print will print all registers, preformatted
 func (r *RegistersType) Print() {
-	Logger.Printf("REGISTERS:\n\tAF: 0x%04X\n\tBC: 0x%04X\n\tDE: 0x%04X\n\tHL: 0x%04X\n\tSP: 0x%04X\n\tPC: 0x%04X\n", r.AF, r.BC, r.DE, r.HL, r.SP, r.PC)
+	Logger.Logf(LogTypes.INFO, "REGISTERS:\n\t\t\t\t\tAF: 0x%04X\n\t\t\t\t\tBC: 0x%04X\n\t\t\t\t\tDE: 0x%04X\n\t\t\t\t\tHL: 0x%04X\n\t\t\t\t\tSP: 0x%04X\n\t\t\t\t\tPC: 0x%04X\n", r.AF, r.BC, r.DE, r.HL, r.SP, r.PC)
 }
 
 // Register16toString converts a register (uint16) to a string, preformatted

@@ -5,7 +5,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"os"
 
@@ -30,9 +29,9 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 	glib.IdleAdd(func(textAdded string) {
 		buff, err := TV.TextView.GetBuffer()
 		if err != nil {
-			fmt.Println(err)
+			core.Logger.Panic(err)
 		}
-		buff.Insert(buff.GetEndIter(), textAdded)
+		buff.InsertMarkup(buff.GetEndIter(), textAdded)
 		TV.TextView.ScrollToMark(buff.GetInsert(), 0.0, false, 0.0, 0.0)
 	}, string(data))
 	return len(data), nil
@@ -42,8 +41,6 @@ func (TV *UITextView) Write(data []byte) (n int, err error) {
 func main() {
 	core.Init()
 	var System = core.System
-
-	fmt.Println(core.LogFilename)
 
 	defer core.LogFile.Close()
 
@@ -58,16 +55,19 @@ func UI(System *core.SystemType) {
 	core.AppRef = app
 
 	app.Connect("startup", func() {
-		core.Logger.Println("FreeMe!GB is starting up...")
+		core.Logger.Log(core.LogTypes.INFO, "FreeMe!GB is starting up...")
 	})
 	app.Connect("activate", func() {
-		core.Logger.Println("FreeMe!GB is activated...")
+		core.Logger.Log(core.LogTypes.INFO, "FreeMe!GB is activated...")
 
 		builder, err := gtk.BuilderNewFromFile("ui/MainWindow.glade")
 		UIErrorCheck(err)
 
 		obj, err := builder.GetObject("MainWindow")
 		UIErrorCheck(err)
+
+		cssProvider, err := gtk.CssProviderNew()
+		cssProvider.LoadFromPath("ui/style.css")
 
 		// Open MenuItem
 		menuOpen, err := builder.GetObject("menuOpen")
@@ -128,9 +128,9 @@ func UI(System *core.SystemType) {
 			TextView: console,
 		}
 
-		multiWriter := io.MultiWriter(core.Logger.Writer(), &consoleUI)
+		multiWriter := io.MultiWriter(core.Logger.InternalLogger.Writer(), &consoleUI)
 
-		core.Logger.SetOutput(multiWriter)
+		core.Logger.InternalLogger.SetOutput(multiWriter)
 		// Run MenuItem
 		menuRunObj, err := builder.GetObject("menuRun")
 		UIErrorCheck(err)
@@ -242,12 +242,12 @@ func UI(System *core.SystemType) {
 			var result = romFileChooserDialog.Run()
 			if result == gtk.RESPONSE_ACCEPT {
 				ROMfile := romFileChooserDialog.GetFilename()
-				core.Logger.Println(ROMfile)
+				core.Logger.Log(core.LogTypes.INFO, ROMfile)
 				romFileChooserDialog.Close()
 				// Do not block UI execution
 				go System.LoadROM(string(ROMfile), romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 			} else if result == gtk.RESPONSE_CANCEL {
-				core.Logger.Println("Cancelling")
+				core.Logger.Log(core.LogTypes.INFO, "Cancelling")
 				romFileChooserDialog.Close()
 			}
 
@@ -266,7 +266,6 @@ func UI(System *core.SystemType) {
 			if runtime.GOOS == "windows" {
 				romLoc = romLoc[1:]
 			}
-			fmt.Println(romLoc)
 			go System.LoadROM(romLoc, romListStore, romTreeStore, romProgressBar, menuDebug, menuRun)
 		})
 
@@ -287,7 +286,7 @@ func UI(System *core.SystemType) {
 		app.AddWindow(win)
 	})
 	app.Connect("shutdown", func() {
-		core.Logger.Println("FreeMe!GB is shutting down...")
+		core.Logger.Log(core.LogTypes.INFO, "FreeMe!GB is shutting down...")
 	})
 
 	app.Run(os.Args[1:])

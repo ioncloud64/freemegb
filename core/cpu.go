@@ -51,11 +51,15 @@ var CPU = CPUType{
 
 // Run is the thread loop function for the CPU
 func (cpu *CPUType) Run(debug bool) {
+	// TODO: Proper CPU control flow with stepping
+
+	// TODO: Proper Breakpoint insertion using an array of addresses
 	cpu.DEBUG = debug
 	for {
+		Logger.Log(LogTypes.INFO, cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name)
 		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
-			Logger.Printf("UNKNOWN INSTRUCTION:\n\tINSTRUCTION: 0x%02X\n\tAt ROM Offset: %s\n",
+			Logger.Logf(LogTypes.ERROR, "UNKNOWN INSTRUCTION:\n\t\t\t\tINSTRUCTION: 0x%02X\n\t\t\t\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
 			if runtime.GOOS == "linux" {
 				conn, err := dbus.SessionBus()
@@ -93,7 +97,7 @@ func (cpu *CPUType) Run(debug bool) {
 			}
 			break
 		}
-		Logger.Println("CPU Step")
+		Logger.Log(LogTypes.INFO, "CPU Step")
 		if cpu.DEBUG {
 			cpu.REGISTERS.Print()
 			time.Sleep(1 * time.Second)

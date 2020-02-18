@@ -94,3 +94,24 @@ func (mmu *MMUType) WriteByte(address uint16, value byte) {
 		io[address-OFFSETio] = value
 	}
 }
+
+func (mmu *MMUType) ReadShort(address uint16) uint16 {
+	return uint16(mmu.ReadByte(address) | mmu.ReadByte((address+1)<<8))
+}
+
+func (mmu *MMUType) WriteShort(address uint16, value uint16) {
+	mmu.WriteByte(address, byte(value&0x00FF))
+	mmu.WriteByte(address+1, byte((value&0xFF00)>>8))
+}
+
+func (mmu *MMUType) ReadShortFromStack() uint16 {
+	var value = mmu.ReadShort(REGISTERS.SP)
+	REGISTERS.SP += 2
+
+	return value
+}
+
+func (mmu *MMUType) WriteShortToStack(value uint16) {
+	REGISTERS.SP -= 2
+	mmu.WriteShort(REGISTERS.SP, value)
+}

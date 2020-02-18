@@ -1892,12 +1892,17 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xCD - UNKNOWN
+	// 0xCD - CALL NN
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec: func() {
+			REGISTERS.PC++
+			var operand = REGISTERS.PC
+			MMU.WriteShortToStack(REGISTERS.PC)
+			REGISTERS.PC = operand
+		},
 		Opcode:      0xCD,
-		Name:        "UNKNOWN",
-		NumOperands: 0,
+		Name:        "CALL NN",
+		NumOperands: 1,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
@@ -2063,12 +2068,16 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xE0 - UNKNOWN
+	// 0xE0 - LOAD 0xFF00 N A
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec: func() {
+			REGISTERS.PC++
+			var operand = ROM.data[REGISTERS.PC]
+			MMU.WriteByte(0xFF00+uint16(operand), REGISTERS.A())
+		},
 		Opcode:      0xE0,
-		Name:        "UNKNOWN",
-		NumOperands: 0,
+		Name:        "LOAD 0xFF00 N A",
+		NumOperands: 1,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
@@ -2210,12 +2219,16 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xF0 - UNKNOWN
+	// 0xF0 - LOAD A 0xFF00 N
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec: func() {
+			REGISTERS.PC++
+			var operand = ROM.data[REGISTERS.PC]
+			REGISTERS.SetA(MMU.ReadByte(0xFF00 + uint16(operand)))
+		},
 		Opcode:      0xF0,
-		Name:        "UNKNOWN",
-		NumOperands: 0,
+		Name:        "LOAD 0xFF00 N",
+		NumOperands: 1,
 		Operands:    []byte{},
 		Cycles:      4,
 	},
@@ -2237,11 +2250,11 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xF3 - UNKNOWN
+	// 0xF3 - DISABLE INTERRUPTS
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { INTERRUPTS.master = 0 },
 		Opcode:      0xF3,
-		Name:        "UNKNOWN",
+		Name:        "DI",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
@@ -2309,11 +2322,11 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xFB - UNKNOWN
+	// 0xFB - ENABLE INTERRUPTS
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec:        func() { INTERRUPTS.master = 1 },
 		Opcode:      0xFB,
-		Name:        "UNKNOWN",
+		Name:        "EI",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
@@ -2352,11 +2365,14 @@ var INSTRUCTIONS = []InstructionType{
 		Operands:    []byte{},
 		Cycles:      4,
 	},
-	// 0xFF - UNKNOWN
+	// 0xFF - RST 38
 	{
-		Exec:        func() { Logger.Panic("INSTRUCTION NOT IMPLEMENTED") },
+		Exec: func() {
+			MMU.WriteShortToStack(REGISTERS.PC)
+			REGISTERS.PC = 0x0038
+		},
 		Opcode:      0xFF,
-		Name:        "UNKNOWN",
+		Name:        "RST 38",
 		NumOperands: 0,
 		Operands:    []byte{},
 		Cycles:      4,
