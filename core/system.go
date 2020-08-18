@@ -42,7 +42,7 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 		ROM.BuildModel()
 
 		ROM.romName = ROM.GetName()
-		Logger.Log(LogTypes.COMPLETED, "Loaded: "+ROM.romName)
+		Logger.Log(LogTypes.INFO, "Found ROM: "+ROM.romName)
 
 		ROM.romType = ROM.GetType()
 		Logger.Log(LogTypes.INFO, "ROM TYPE: "+ROM.romType)
@@ -83,7 +83,7 @@ func (system *SystemType) LoadROM(location string, romListStore *gtk.ListStore,
 		return
 	}
 	after := time.Now()
-	Logger.Log(LogTypes.COMPLETED, "ROM: Loaded in", after.Sub(before))
+	Logger.Logf(LogTypes.COMPLETED, "ROM: %s Loaded in %.2fs", ROM.romName, after.Sub(before).Seconds())
 	menuDebug.SetSensitive(true)
 	menuRun.SetSensitive(true)
 	return
