@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"path/filepath"
 	"runtime"
 	"time"
 
@@ -80,19 +81,21 @@ func (cpu *CPUType) Run(debug bool) {
 
 				notify.SendNotification(conn, notif)
 			} else if runtime.GOOS == "windows" {
+				file_location, _ := filepath.Abs("ui/freemegb.png")
 				notification := &toast.Notification{
-					AppID:               "com.ioncloud64.freemegb",
-					Title:               "FreeMe!GB",
-					Message:             "Hello!",
-					Icon:                "ui/freemegb.ico",
-					Actions:             []toast.Action{},
-					ActivationType:      "",
-					ActivationArguments: "",
-					Audio:               "default",
-					Loop:                false,
-					Duration:            "short",
+					AppID: "FreeMe!GB",
+					Title: "Unknown Instruction",
+					Message: fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+						cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
+					Icon: file_location,
+					Actions: []toast.Action{
+						{"protocol", "Dismiss", ""},
+					},
 				}
-				notification.Push()
+				err := notification.Push()
+				if err != nil {
+					Logger.Log(LogTypes.ERROR, err)
+				}
 			}
 			break
 		}
