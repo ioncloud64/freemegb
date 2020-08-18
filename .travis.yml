@@ -29,4 +29,6 @@ before_install:
   - "export Pango_VERSION=$(pkg-config --modversion pango)"
 
 script:
-  - make travisci
+  - go get github.com/esiqveland/notify
+  - go get -u -v -tags gtk_$GTK_VERSION github.com/gotk3/gotk3/gtk
+  - make host
