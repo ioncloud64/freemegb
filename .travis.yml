@@ -3,7 +3,7 @@ language: go
 go_import_path: github.com/ioncloud64/freemegb
 
 go:
-  - 1.13
+  - 1.15
 deploy:
   provider: releases
   skip_cleanup: true
@@ -31,4 +31,4 @@ before_install:
 script:
   - go get github.com/esiqveland/notify
   - go get -u -v -tags gtk_$GTK_VERSION github.com/gotk3/gotk3/gtk
-  - make travisci
+  - make host
