@@ -56,7 +56,6 @@ func (cpu *CPUType) Run(debug bool) {
 	// TODO: Proper Breakpoint insertion using an array of addresses
 	cpu.DEBUG = debug
 	for {
-		Logger.Log(LogTypes.INFO, cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name)
 		if cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name == "UNKNOWN" {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
 			Logger.Logf(LogTypes.ERROR, "UNKNOWN INSTRUCTION:\n\t\t\t\tINSTRUCTION: 0x%02X\n\t\t\t\tAt ROM Offset: %s\n",
@@ -97,7 +96,7 @@ func (cpu *CPUType) Run(debug bool) {
 			}
 			break
 		}
-		Logger.Log(LogTypes.INFO, "CPU Step")
+		Logger.Logf(LogTypes.INFO, "Instruction: %s\n", cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name)
 		if cpu.DEBUG {
 			cpu.REGISTERS.Print()
 			time.Sleep(1 * time.Second)

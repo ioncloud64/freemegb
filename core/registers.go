@@ -118,12 +118,12 @@ func (r *RegistersType) Print() {
 
 // Register16toString converts a register (uint16) to a string, preformatted
 func (r *RegistersType) Register16toString(register uint16) string {
-	return fmt.Sprintf("16-bit Register: 0x%04X\n", register)
+	return fmt.Sprintf("0x%04X\n", register)
 }
 
 // Register8toString converts a register (byte) to a string, preformatted
 func (r *RegistersType) Register8toString(register byte) string {
-	return fmt.Sprintf("8-bit Register: 0x%02X\n", register)
+	return fmt.Sprintf("0x%02X\n", register)
 }
 
 // CombineTo16 combines two 8-bit registers into a 16-bit register
