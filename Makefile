@@ -30,6 +30,7 @@ linux_amd64:
 	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
 travisci:
+	mkdir -p bin/linux_amd64
 	GOOS=linux GOARCH=amd64 go build -v -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
 host:
