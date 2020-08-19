@@ -30,7 +30,7 @@ var Logger LoggerType
 func (logger *LoggerType) Log(Ltype byte, v ...interface{}) {
 	switch Ltype {
 	case 0: // INFO
-		logger.InternalLogger.SetPrefix("<span foreground='#FFCC00' font='bold'>[INFO]:\t\t\t</span>")
+		logger.InternalLogger.SetPrefix("<span foreground='#555555' font='bold'>[INFO]:\t\t\t</span>")
 		break
 	case 1: // ERROR
 		logger.InternalLogger.SetPrefix("<span foreground='#770000' font='bold'>[ERROR]:\t\t</span>")
@@ -70,7 +70,7 @@ func (logger *LoggerType) Log(Ltype byte, v ...interface{}) {
 func (logger *LoggerType) Logf(Ltype byte, format string, v ...interface{}) {
 	switch Ltype {
 	case 0: // INFO
-		logger.InternalLogger.SetPrefix("<span foreground='#FFCC00' font='bold'>[INFO]:\t\t\t</span>")
+		logger.InternalLogger.SetPrefix("<span foreground='#555555' font='bold'>[INFO]:\t\t\t</span>")
 		break
 	case 1: // ERROR
 		logger.InternalLogger.SetPrefix("<span foreground='#770000' font='bold'>[ERROR]:\t\t</span>")

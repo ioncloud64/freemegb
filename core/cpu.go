@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"path/filepath"
 	"runtime"
 	"time"
 
@@ -10,7 +9,7 @@ import (
 	// "github.com/gotk3/gotk3/glib"
 	"github.com/esiqveland/notify"
 	"github.com/godbus/dbus"
-	"gopkg.in/toast.v1"
+	// "gopkg.in/toast.v1"
 )
 
 // INTERRUPTSType is the structure to define constant values used to identify an interrupt
@@ -81,21 +80,21 @@ func (cpu *CPUType) Run(debug bool) {
 
 				notify.SendNotification(conn, notif)
 			} else if runtime.GOOS == "windows" {
-				file_location, _ := filepath.Abs("ui/freemegb.png")
-				notification := &toast.Notification{
-					AppID: "FreeMe!GB",
-					Title: "Unknown Instruction",
-					Message: fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
-						cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
-					Icon: file_location,
-					Actions: []toast.Action{
-						{"protocol", "Dismiss", ""},
-					},
-				}
-				err := notification.Push()
-				if err != nil {
-					Logger.Log(LogTypes.ERROR, err)
-				}
+				// file_location, _ := filepath.Abs("ui/freemegb.png")
+				// notification := &toast.Notification{
+				// 	AppID: "FreeMe!GB",
+				// 	Title: "Unknown Instruction",
+				// 	Message: fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+				// 		cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
+				// 	Icon: file_location,
+				// 	Actions: []toast.Action{
+				// 		{"protocol", "Dismiss", ""},
+				// 	},
+				// }
+				// err := notification.Push()
+				// if err != nil {
+				// 	Logger.Log(LogTypes.ERROR, err)
+				// }
 			}
 			break
 		}
