@@ -8,15 +8,18 @@ import (
 	"github.com/go-toast/toast"
 )
 
+// Notify is a function to display notifications across all platforms (Mac OS X, Linux, and MS Windows 10)
+// This particular version is designed for Windows.
+// It utilizes the go-toast/toast library to display native notifications on Windows 10
 func Notify(message string) {
-	file_location, _ := filepath.Abs("ui/freemegb.png")
+	fileLocation, _ := filepath.Abs("ui/freemegb.png")
 	notification := &toast.Notification{
 		AppID:   "FreeMe!GB",
 		Title:   "Unknown Instruction",
 		Message: message,
-		Icon:    file_location,
+		Icon:    fileLocation,
 		Actions: []toast.Action{
-			{"system", "Dismiss", "dismiss"},
+			{Type: "system", Label: "Dismiss", Arguments: "dismiss"},
 		},
 	}
 	err := notification.Push()

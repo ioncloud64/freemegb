@@ -7,6 +7,9 @@ import (
 	"github.com/godbus/dbus"
 )
 
+// Notify is a function to display notifications across all platforms (Mac OS X, Linux, and MS Windows 10)
+// This particular version is designed for Linux.
+// It utilizes the godbus/dbus and esiqveland/notify packages to display native notifications.
 func Notify(message string) {
 	conn, err := dbus.SessionBus()
 	if err != nil {
