@@ -3,7 +3,7 @@ language: go
 go_import_path: github.com/ioncloud64/freemegb
 
 go:
-  - 1.15
+  - 1.13
 deploy:
   provider: releases
   skip_cleanup: true
@@ -27,6 +27,10 @@ before_install:
   - "export Glib_VERSION=$(pkg-config --modversion glib-2.0)"
   - "export Cairo_VERSION=$(pkg-config --modversion cairo)"
   - "export Pango_VERSION=$(pkg-config --modversion pango)"
+  - echo $GTK_VERSION
+  - echo $Glib_VERSION
+  - echo $Cairo_VERSION
+  - echo $Pango_VERSION
 
 script:
   - make travisci

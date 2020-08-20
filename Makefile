@@ -31,7 +31,7 @@ linux_amd64:
 	cp -rf ui bin/linux_amd64
 travisci:
 	mkdir -p bin/linux_amd64
-	go build -v -tags gtk_3_22 -o bin/linux_amd64/freemegb
+	go build -v -tags $(GTK_VERSION) -o bin/linux_amd64/freemegb
 	cp -rf ui bin/linux_amd64
 host:
 ifeq ($(os),windows)
