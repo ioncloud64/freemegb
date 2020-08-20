@@ -2,14 +2,9 @@ package core
 
 import (
 	"fmt"
-	"runtime"
 	"time"
-
 	// "log"
 	// "github.com/gotk3/gotk3/glib"
-	"github.com/esiqveland/notify"
-	"github.com/godbus/dbus"
-	// "gopkg.in/toast.v1"
 )
 
 // INTERRUPTSType is the structure to define constant values used to identify an interrupt
@@ -60,42 +55,8 @@ func (cpu *CPUType) Run(debug bool) {
 			var PCString = cpu.REGISTERS.Register16toString(cpu.REGISTERS.PC)
 			Logger.Logf(LogTypes.ERROR, "UNKNOWN INSTRUCTION:\n\t\t\t\tINSTRUCTION: 0x%02X\n\t\t\t\tAt ROM Offset: %s\n",
 				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString)
-			if runtime.GOOS == "linux" {
-				conn, err := dbus.SessionBus()
-				if err != nil {
-					panic(err)
-				}
-				iconName := "ioncloud64-freemegb"
-				notif := notify.Notification{
-					AppName:    "FreeMe!GB",
-					ReplacesID: uint32(0),
-					AppIcon:    iconName,
-					Summary:    "Unknown Instruction",
-					Body: fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
-						cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
-					Actions:       []string{"cancel", "Cancel", "open", "Open"}, // tuples of (action_key, label)
-					Hints:         map[string]dbus.Variant{"desktop-entry": dbus.MakeVariant("freemegb")},
-					ExpireTimeout: int32(5000),
-				}
-
-				notify.SendNotification(conn, notif)
-			} else if runtime.GOOS == "windows" {
-				// file_location, _ := filepath.Abs("ui/freemegb.png")
-				// notification := &toast.Notification{
-				// 	AppID: "FreeMe!GB",
-				// 	Title: "Unknown Instruction",
-				// 	Message: fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
-				// 		cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString),
-				// 	Icon: file_location,
-				// 	Actions: []toast.Action{
-				// 		{"protocol", "Dismiss", ""},
-				// 	},
-				// }
-				// err := notification.Push()
-				// if err != nil {
-				// 	Logger.Log(LogTypes.ERROR, err)
-				// }
-			}
+			Notify(fmt.Sprintf("INSTRUCTION: 0x%02X\nAt ROM Offset: %s",
+				cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Opcode, PCString))
 			break
 		}
 		Logger.Logf(LogTypes.INFO, "Instruction: %s\n", cpu.INSTRUCTIONS[ROM.data[cpu.REGISTERS.PC]].Name)
