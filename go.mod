@@ -1,4 +1,4 @@
-module github.com/ioncloud64/freemegb
+module github.com/axioncloud/freemegb
 
 go 1.13
 
